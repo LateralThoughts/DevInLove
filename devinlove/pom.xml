@@ -18,11 +18,8 @@
         
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.version>3.0.7.RELEASE</spring.version>
-    <aspectj.version>1.6.12</aspectj.version>
-    <slf4j.version>1.6.1</slf4j.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring-data-neo4j.version>2.0.0.RELEASE</spring-data-neo4j.version>
+    <neo4j-version>1.6.M02</neo4j-version>
   </properties>
 
   <dependencies>
@@ -36,6 +33,11 @@
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-neo4j</artifactId>
       <version>${spring-data-neo4j.version}</version>
+    </dependency>
+    <dependency>
+     <groupId>org.neo4j</groupId>
+     <artifactId>neo4j</artifactId>
+     <version>${neo4j-version}</version>
     </dependency>
   </dependencies>
   <build>
