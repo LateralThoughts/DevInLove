@@ -9,8 +9,14 @@
         http://www.springframework.org/schema/data/graph http://www.springframework.org/schema/data/graph/datagraph-1.0.xsd
         ">
     <context:annotation-config/>
+    <context:component-scan base-package="com.lateralthoughts.devinlove">
+        <!-- TODO exclude ?-->
+    </context:component-scan>
+
+    <!-- Set up here to store the database-->
     <datagraph:config storeDirectory="target/config-test"/>
 
-    <neo4j:repositories base-package="org.neo4j.app.todos"/>
+    <!-- Where to scan for beans repository -->
+    <datagraph:repositories base-package="com.lateralthoughts.devinlove.bean.repository"/>
 
 </beans>
