@@ -9,13 +9,17 @@ import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.NodeEntity;
 
 /**
  * Tool that people can love or hate use during their company time or free time.
  * Can be a programming language, a framework, a piece of software...
  */
+@NodeEntity
 public class Tool {
 
+    @GraphId private Long id;
 	private String name;
 	private String version;
 	private DateTime creationDate;
