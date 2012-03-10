@@ -6,10 +6,20 @@ import org.junit.Test;
 
 
 public class PersonTest {
+
 	@Test
 	public void when_instanciating_with_names_then_retrieved() {
-		Person person = new Person("John", "Doe");
-		assertThat(person.getFirstName()).isEqualTo("John");
-		assertThat(person.getLastName()).isEqualTo("Doe");
+		Person johnDoe = new Person("John", "Doe");
+		assertThat(johnDoe.getFirstName()).isEqualTo("John");
+		assertThat(johnDoe.getLastName()).isEqualTo("Doe");
+	}
+
+	@Test
+	public void when_instanciating_similar_people_then_are_equal() {
+		Person johnDoe = new Person("John", "Doe");
+		Person johnDoeBis = new Person("John", "Doe");
+		Person janeDoe = new Person("Jane", "Doe");
+		assertThat(johnDoe).isEqualTo(johnDoeBis);
+		assertThat(johnDoe).isNotEqualTo(janeDoe);
 	}
 }

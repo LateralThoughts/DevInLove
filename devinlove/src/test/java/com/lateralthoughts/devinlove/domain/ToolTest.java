@@ -36,12 +36,12 @@ public class ToolTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void when_adding_nothing_backing_companies_then_exception() {
+	public void when_adding_nothing_then_exception() {
 		tool.addBackingCompany(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void when_adding_null_backing_company_then_exception() {
+	public void when_adding_null_provider_then_exception() {
 		tool.addBackingCompany((Company[]) null);
 	}
 
@@ -70,17 +70,12 @@ public class ToolTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void when_adding_nothing_then_exception() {
+	public void when_adding_null_authors_then_exception() {
 		tool.addAuthor(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void when_adding_null_authors_then_exception() {
-		tool.addAuthor((Person[]) null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void when_adding_null_author_provider_then_exception() {
+	public void when_adding_null_author_then_exception() {
 		tool.addAuthor((Person[]) null);
 	}
 }
