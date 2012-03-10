@@ -23,6 +23,8 @@
 		<eclipse-lifecycle-mapping.version>1.0.0</eclipse-lifecycle-mapping.version>
 		<resources-plugin.version>2.4.3</resources-plugin.version>
 		<fest-assert.version>1.4</fest-assert.version>
+		<surefire-plugin.version>2.12</surefire-plugin.version>
+		<joda-time.version>2.0</joda-time.version>
 	</properties>
 
 	<dependencies>
@@ -43,6 +45,12 @@
 			<version>${neo4j-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
+		</dependency>
+		<!-- tests -->
+		<dependency>
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert</artifactId>
 			<version>${fest-assert.version}</version>
@@ -61,6 +69,11 @@
 					<downloadSources>true</downloadSources>
 					<dependenciesAsLibraries>true</dependenciesAsLibraries>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire-plugin.version}</version>
 			</plugin>
 		</plugins>
 		<pluginManagement>
