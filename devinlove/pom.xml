@@ -22,17 +22,21 @@
 		<neo4j-version>1.6</neo4j-version>
 		<eclipse-lifecycle-mapping.version>1.0.0</eclipse-lifecycle-mapping.version>
 		<resources-plugin.version>2.4.3</resources-plugin.version>
+		<junit.version>4.10</junit.version>
 		<fest-assert.version>1.4</fest-assert.version>
 		<surefire-plugin.version>2.12</surefire-plugin.version>
 		<joda-time.version>2.0</joda-time.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
+		<guava.version>11.0.1</guava.version>
+		<jdk.version>1.6</jdk.version>
+		<compiler-plugin.version>2.3.2</compiler-plugin.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -55,6 +59,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
 		<!-- tests -->
 		<dependency>
 			<groupId>org.easytesting</groupId>
@@ -66,6 +75,15 @@
 	<build>
 		<finalName>springdata-neo4j</finalName>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler-plugin.version}</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<!-- IntelliJ Idea Support -->
 				<groupId>org.apache.maven.plugins</groupId>

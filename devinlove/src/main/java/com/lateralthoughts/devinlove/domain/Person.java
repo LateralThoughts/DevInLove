@@ -1,4 +1,4 @@
-package com.lateralthoughts.devinlove.bean;
+package com.lateralthoughts.devinlove.domain;
 
 /**
  * We are all human (almost).
