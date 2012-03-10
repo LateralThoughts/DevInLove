@@ -1,6 +1,8 @@
 package com.lateralthoughts.devinlove.domain;
 
+import org.springframework.data.neo4j.annotation.NodeEntity;
 
+@NodeEntity
 public class Category {
 
 	private final String name;

@@ -1,6 +1,10 @@
 package com.lateralthoughts.devinlove.controller;
 
+import com.lateralthoughts.devinlove.domain.Mascot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,13 +17,17 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class HomeController {
+    @Autowired Neo4jTemplate template;
 
+    @Transactional
     @RequestMapping(value = "/index.html")
     public ModelAndView index() throws Exception {
-        String aMessage = "Hello World MVC!";
-
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("message", aMessage);
+        Mascot m = new Mascot();
+        m.name = "Django Pony";
+        template.save(m);
+
+        modelAndView.addObject("latestMascots", template.findAll(Mascot.class));
 
         return modelAndView;
     }

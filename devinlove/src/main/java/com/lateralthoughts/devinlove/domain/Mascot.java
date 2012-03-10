@@ -10,8 +10,7 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
 public class Mascot {
     
     @GraphId Long id;
-    
-    //@Indexed(type="FULLTEXT", indexName = "search")
-    String name;
+    public String name;
 
+    public Mascot() {}
 }
