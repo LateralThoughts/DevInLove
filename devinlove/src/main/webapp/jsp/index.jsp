@@ -1,4 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>DevInLove</title>
@@ -18,10 +22,8 @@
     <div class="span6">No ? :'( ? <a href="<c:url value="/register.html" />">Register and join the fun !</a></div>
     </div>
     <div class="span3">
+        With already grrr <c:out value="${message}"/> or ${message} mascots :
         <ul>
-        <c:forEach items="${latestMascots}" var="mascot">
-            <li><c:out value="${mascot.name}" /></li>
-        </c:forEach>
         </ul>
     </div>
 </div>
