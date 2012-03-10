@@ -81,7 +81,7 @@ public class Tool {
 	}
 
 	public void addAuthor(final Person... authors) {
-		checkArgument(backingCompanies != null);
+		checkArgument(authors != null);
 		List<Person> list = asList(authors);
 		checkArgument(!list.contains(null));
 		this.authors.addAll(list);
