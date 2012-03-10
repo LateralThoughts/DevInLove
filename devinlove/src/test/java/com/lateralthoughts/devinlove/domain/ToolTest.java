@@ -7,10 +7,6 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.lateralthoughts.devinlove.domain.Category;
-import com.lateralthoughts.devinlove.domain.Company;
-import com.lateralthoughts.devinlove.domain.Tool;
-
 public class ToolTest {
 
 	private Tool tool;
@@ -65,5 +61,21 @@ public class ToolTest {
 	public void when_setting_is_revolutionary_then_retrieved() {
 		tool.setRevolutionary(true);
 		assertThat(tool.isRevolutionary()).isTrue();
+	}
+
+	@Test
+	public void when_adding_author_then_retrieved() {
+		tool.addAuthor(new Person("John", "Doe"), new Person("Jane", "Doe"));
+		assertThat(tool.getAuthors()).containsOnly(new Person("John", "Doe"), new Person("Jane", "Doe"));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void when_adding_null_authors_then_exception() {
+		tool.addAuthor(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void when_adding_null_author_then_exception() {
+		tool.addAuthor((Person[]) null);
 	}
 }
