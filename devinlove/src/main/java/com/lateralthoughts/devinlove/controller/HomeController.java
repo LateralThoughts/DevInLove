@@ -1,5 +1,9 @@
 package com.lateralthoughts.devinlove.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 /**
  * Created by IntelliJ IDEA.
  * User: ogirardot
@@ -7,5 +11,16 @@ package com.lateralthoughts.devinlove.controller;
  * Time: 12:16
  * To change this template use File | Settings | File Templates.
  */
-public class HomeController implements  {
+@Controller
+public class HomeController {
+
+    @RequestMapping(value = "/index.html")
+    public ModelAndView index() throws Exception {
+        String aMessage = "Hello World MVC!";
+
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("message", aMessage);
+
+        return modelAndView;
+    }
 }
