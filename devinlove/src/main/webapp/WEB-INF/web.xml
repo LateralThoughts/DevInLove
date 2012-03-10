@@ -3,7 +3,7 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <display-name>DevInLove </display-name>
+    <display-name>DevInLove &lt;3</display-name>
     <description>Neo4j Spring Data Application to find your true soulmate or nemesis</description>
 
     <context-param>

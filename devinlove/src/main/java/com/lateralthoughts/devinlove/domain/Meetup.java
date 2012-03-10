@@ -1,4 +1,4 @@
-package com.lateralthoughts.devinlove.bean;
+package com.lateralthoughts.devinlove.domain;
 
 /**
  * Places where people (usually geeks) meet-up around a subject
