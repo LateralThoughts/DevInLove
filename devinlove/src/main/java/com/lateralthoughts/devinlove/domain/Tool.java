@@ -20,8 +20,10 @@ public class Tool {
 	private String version;
 	private DateTime creationDate;
 	private final ArrayList<Company> backingCompanies = new ArrayList<Company>();
+
 	private Category category;
 	private boolean revolutionary;
+	private final ArrayList<Person> authors = new ArrayList<Person>();
 
 	public void setName(final String name) {
 		this.name = name;
@@ -72,6 +74,17 @@ public class Tool {
 
 	public boolean isRevolutionary() {
 		return revolutionary;
+	}
+
+	public void addAuthor(final Person... authors) {
+		checkArgument(backingCompanies != null);
+		List<Person> list = asList(authors);
+		checkArgument(!list.contains(null));
+		this.authors.addAll(list);
+	}
+
+	public List<Person> getAuthors() {
+		return this.authors;
 	}
 
 }
