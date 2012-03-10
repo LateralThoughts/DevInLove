@@ -25,6 +25,7 @@
 		<fest-assert.version>1.4</fest-assert.version>
 		<surefire-plugin.version>2.12</surefire-plugin.version>
 		<joda-time.version>2.0</joda-time.version>
+		<spring.version>3.1.0.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
@@ -48,6 +49,11 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>${joda-time.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<!-- tests -->
 		<dependency>
