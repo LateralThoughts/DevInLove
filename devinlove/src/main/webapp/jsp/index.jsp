@@ -25,7 +25,7 @@
         With already so much mascots :
         <ul>
            <c:forEach items="${latestMascots}" var="mascot">
-             <li><c:out value="${mascot.getName}" /></li>
+             <li><c:out value="${mascot.name}" /></li>
            </c:forEach>
         </ul>
     </div>
