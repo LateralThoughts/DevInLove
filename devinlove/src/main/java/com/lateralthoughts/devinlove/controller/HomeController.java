@@ -2,6 +2,7 @@ package com.lateralthoughts.devinlove.controller;
 
 import com.lateralthoughts.devinlove.domain.Mascot;
 import com.lateralthoughts.devinlove.repository.MascotRepository;
+import com.lateralthoughts.devinlove.repository.PersonRepository;
 import org.neo4j.helpers.collection.ClosableIterable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,9 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-    @Autowired
-    MascotRepository mascotRepository;
+
+    @Autowired MascotRepository mascotRepository;
+    @Autowired PersonRepository personRepository;
 
     @RequestMapping(value = "/index.html")
     public String index(final Model model) throws Exception {
@@ -37,5 +39,11 @@ public class HomeController {
         }
         list.close();
         return out;
+    }
+
+    @RequestMapping(value = "/search.html")
+    public String search(final Model model) throws Exception {
+        personRepository.findAllByQuery()
+        return "index";
     }
 }
