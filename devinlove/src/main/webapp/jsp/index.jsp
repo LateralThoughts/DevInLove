@@ -22,10 +22,10 @@
     <div class="span6">No ? :'( ? <a href="<c:url value="/register.html" />">Register and join the fun !</a></div>
     </div>
     <div class="span3">
-        With already grrr <c:out value="${message}"/> or ${message} mascots :
+        With already so much mascots :
         <ul>
            <c:forEach items="${latestMascots}" var="mascot">
-             <li><c:out value="${mascot}" /></li>
+             <li><c:out value="${mascot.getName}" /></li>
            </c:forEach>
         </ul>
     </div>
