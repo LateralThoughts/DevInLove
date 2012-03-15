@@ -24,6 +24,9 @@
     <div class="span3">
         With already grrr <c:out value="${message}"/> or ${message} mascots :
         <ul>
+           <c:forEach items="${latestMascots}" var="mascot">
+             <li><c:out value="${mascot}" /></li>
+           </c:forEach>
         </ul>
     </div>
 </div>

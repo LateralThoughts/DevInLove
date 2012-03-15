@@ -23,6 +23,6 @@ public class HomeController {
         mascotRepository.save(m);
         model.addAttribute("message", "test");
         model.addAttribute("latestMascots", Arrays.asList(new String[]{"a", "b", "c"}));
-        return "index";
+        return "jsp/index.jsp";
     }
 }
