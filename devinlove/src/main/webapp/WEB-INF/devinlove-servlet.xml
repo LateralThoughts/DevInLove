@@ -16,6 +16,15 @@
 
 	<mvc:default-servlet-handler />
 	<mvc:view-controller path="/" view-name="index.jsp" />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
 	<tx:annotation-driven mode="aspectj"
 		transaction-manager="transactionManager" />
 </beans>
