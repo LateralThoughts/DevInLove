@@ -1,12 +1,18 @@
 package com.lateralthoughts.devinlove.domain;
 
+import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.NodeEntity;
+
 
 /**
  * Company where peoples worked with several tools
  * for a salary (or not)
  */
+@NodeEntity
 public class Company {
 
+	@GraphId
+	private Long id;
 	private final String name;
 
 	public Company(final String name) {

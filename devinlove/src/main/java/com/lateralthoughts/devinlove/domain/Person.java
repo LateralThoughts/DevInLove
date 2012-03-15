@@ -1,11 +1,17 @@
 package com.lateralthoughts.devinlove.domain;
 
+import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.NodeEntity;
+
 
 /**
  * We are all human (almost).
  */
+@NodeEntity
 public class Person {
 
+	@GraphId
+	private Long id;
 	private final String firstName;
 	private final String lastName;
 

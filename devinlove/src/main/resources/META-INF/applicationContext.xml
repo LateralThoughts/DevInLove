@@ -13,6 +13,7 @@
         http://www.springframework.org/schema/mvc  http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <context:annotation-config/>
+    <!-- needed by AspectJ (AnnotationBeanConfigurerAspect) -->
     <context:spring-configured/>
     <context:component-scan base-package="com.lateralthoughts.devinlove">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -20,11 +21,11 @@
 
     <tx:annotation-driven/>
 
-    <!-- Set up here to store the database-->
+    <!-- Set up where to store the database-->
     <neo4j:config storeDirectory="data/graph.db"/>
 
     <!-- Where to scan for beans repository -->
-    <neo4j:repositories base-package="com.lateralthoughts.devinlove.bean.repository"/>
+    <neo4j:repositories base-package="com.lateralthoughts.devinlove.repository"/>
 
     <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
 
