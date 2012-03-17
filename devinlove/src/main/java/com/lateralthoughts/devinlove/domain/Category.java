@@ -1,10 +1,12 @@
 package com.lateralthoughts.devinlove.domain;
 
+import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 
 @NodeEntity
 public class Category {
-
+	@GraphId
+	private Long id;
 	private final String name;
 
 	public Category(final String name) {
@@ -13,6 +15,10 @@ public class Category {
 
 	public String getName() {
 		return name;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	@Override

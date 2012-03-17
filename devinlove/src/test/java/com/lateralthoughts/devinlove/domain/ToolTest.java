@@ -35,22 +35,6 @@ public class ToolTest {
 		assertThat(tool.getCreationDate().getTime()).isEqualTo(creationDate.getTime());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void when_adding_nothing_then_exception() {
-		tool.addBackingCompany(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void when_adding_null_provider_then_exception() {
-		tool.addBackingCompany((Company[]) null);
-	}
-
-	@Test
-	public void when_adding_providers_then_all_retrieved() {
-		tool.addBackingCompany(new Company("Lateral Thoughts"), new Company("Sonatype"), new Company("SpringSource"));
-		assertThat(tool.getBackingCompanies()).containsOnly(new Company("Lateral Thoughts"), new Company("Sonatype"), new Company("SpringSource"));
-	}
-
 	@Test
 	public void when_setting_category_then_retrieved() {
 		tool.setCategory(new Category("Software build"));

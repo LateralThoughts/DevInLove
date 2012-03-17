@@ -8,30 +8,15 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
  */
 @NodeEntity
 public class Mascot {
-    
-    @GraphId Long id;
-    public String name;
-
-    public Mascot() {}
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Mascot mascot = (Mascot) o;
-
-        if (id != null ? !id.equals(mascot.id) : mascot.id != null) return false;
-        if (name != null ? !name.equals(mascot.name) : mascot.name != null) return false;
-
-        return true;
-    }
+	@GraphId
+	private Long id;
+	private String name;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -39,7 +24,7 @@ public class Mascot {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -51,6 +36,23 @@ public class Mascot {
     }
 
     @Override
+	public boolean equals(final Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		Mascot mascot = (Mascot) o;
+
+		if (id != null ? !id.equals(mascot.id) : mascot.id != null)
+			return false;
+		if (name != null ? !name.equals(mascot.name) : mascot.name != null)
+			return false;
+
+		return true;
+	}
+
+	@Override
     public String toString() {
         return "Mascot{" +
                 "id=" + id +

@@ -6,8 +6,8 @@
 <html>
 <head>
     <title>DevInLove</title>
-    <link rel="stylesheet" type="text/css" charset="utf-8" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
-    <link rel="stylesheet" type="text/css" charset="utf-8" href="<c:url value="/resources/css/style.css" />"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />"/>
     <script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </head>
 <body>

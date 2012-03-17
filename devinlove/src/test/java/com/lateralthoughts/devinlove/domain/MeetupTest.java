@@ -45,11 +45,4 @@ public class MeetupTest {
 	public void when_adding_null_subject_then_exception() {
 		meetup.addSubject((TalkSubject) null);
 	}
-
-	@Test
-	public void when_setting_location_then_retrieved() {
-		GeographicalLocation location = new GeographicalLocation();
-		meetup.setLocation(location);
-		assertThat(meetup.getLocation()).isEqualTo(location);
-	}
 }

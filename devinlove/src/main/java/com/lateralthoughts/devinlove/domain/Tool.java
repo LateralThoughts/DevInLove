@@ -2,7 +2,6 @@ package com.lateralthoughts.devinlove.domain;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Arrays.asList;
-import static java.util.Collections.unmodifiableList;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,12 +17,11 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
  */
 @NodeEntity
 public class Tool {
-
-    @GraphId private Long id;
+	@GraphId
+	private Long id;
 	private String name;
 	private String version;
 	private DateTime creationDate;
-	private final ArrayList<Company> backingCompanies = new ArrayList<Company>();
 
 	private Category category;
 	private boolean revolutionary;
@@ -53,17 +51,6 @@ public class Tool {
 		return creationDate.toDate();
 	}
 
-	public void addBackingCompany(final Company... backingCompanies) {
-		checkArgument(backingCompanies != null);
-		List<Company> list = asList(backingCompanies);
-		checkArgument(!list.contains(null));
-		this.backingCompanies.addAll(list);
-	}
-
-	public List<Company> getBackingCompanies() {
-		return unmodifiableList(backingCompanies);
-	}
-
 	public void setCategory(final Category category) {
 		this.category = category;
 	}
@@ -89,6 +76,10 @@ public class Tool {
 
 	public List<Person> getAuthors() {
 		return this.authors;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 }

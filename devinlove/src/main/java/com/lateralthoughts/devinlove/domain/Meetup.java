@@ -18,13 +18,11 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
  */
 @NodeEntity
 public class Meetup {
-
 	@GraphId
 	private Long id;
 	private DateTime startDate;
 	private DateTime endDate;
 	private final ArrayList<TalkSubject> subjects = new ArrayList<TalkSubject>();
-	private GeographicalLocation location;
 
 	public void setStartDate(final Date date) {
 		startDate = new DateTime(date);
@@ -53,11 +51,7 @@ public class Meetup {
 		return subjects;
 	}
 
-	public void setLocation(final GeographicalLocation location) {
-		this.location = location;
-	}
-
-	public GeographicalLocation getLocation() {
-		return location;
+	public Long getId() {
+		return id;
 	}
 }

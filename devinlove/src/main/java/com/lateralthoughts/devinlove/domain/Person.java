@@ -1,5 +1,13 @@
 package com.lateralthoughts.devinlove.domain;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.google.common.collect.ImmutableList.copyOf;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 
@@ -10,14 +18,33 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
 @NodeEntity
 public class Person {
 
+	public enum ProfoundIdentity {
+		DEVELOPER, ARCHITECT, SYSADMIN, MANAGER, BOSS;
+	}
+
 	@GraphId
 	private Long id;
 	private final String firstName;
 	private final String lastName;
+	private String favoriteColor;
+	private Mascot mascot;
+	private final List<Person> friends = new LinkedList<Person>();
+	private final List<Tool> tools = new LinkedList<Tool>();
+	/**
+	 * Simplistic European-formatted shoe size
+	 */
+	private int shoeSize;
+	private final LinkedList<String> statuses = new LinkedList<String>();
+	private ProfoundIdentity profoundIdentity;
+
 
 	public Person(final String firstName, final String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getFirstName() {
@@ -26,6 +53,68 @@ public class Person {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public void setFavoriteColor(final String favoriteColor) {
+		checkNotNull(favoriteColor);
+		this.favoriteColor = favoriteColor.toUpperCase();
+	}
+
+	public String getFavoriteColor() {
+		return favoriteColor;
+	}
+
+	public void setMascot(final Mascot mascot) {
+		this.mascot = mascot;
+	}
+
+	public Mascot getMascot() {
+		return mascot;
+	}
+
+	public List<Person> getFriends() {
+		return copyOf(friends);
+	}
+
+	public void addFriend(final Person friend) {
+		checkNotNull(friend);
+		friends.add(friend);
+	}
+
+	public void addTool(final Tool tool) {
+		checkNotNull(tool);
+		tools.add(tool);
+	}
+
+	public List<Tool> getTools() {
+		return copyOf(tools);
+	}
+
+	public void setShoeSize(final int shoeSize) {
+		checkArgument(shoeSize > 0 && shoeSize < 80);
+		this.shoeSize = shoeSize;
+	}
+
+	public int getShoeSize() {
+		return shoeSize;
+	}
+
+	public void addStatus(final String status) {
+		checkArgument(!isNullOrEmpty(status));
+		statuses.add(status);
+	}
+
+	public List<String> getStatuses() {
+		return copyOf(statuses);
+	}
+
+	public void setProfoundIdentity(final ProfoundIdentity profoundIdentity) {
+		checkNotNull(profoundIdentity);
+		this.profoundIdentity = profoundIdentity;
+	}
+
+	public ProfoundIdentity getProfoundIdentity() {
+		return profoundIdentity;
 	}
 
 	@Override
