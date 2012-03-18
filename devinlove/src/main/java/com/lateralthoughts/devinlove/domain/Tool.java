@@ -1,15 +1,19 @@
 package com.lateralthoughts.devinlove.domain;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableSet;
+import static org.neo4j.graphdb.Direction.INCOMING;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
-import org.joda.time.DateTime;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.springframework.data.neo4j.annotation.RelatedToVia;
 
 /**
  * Tool that people can love or hate use during their company time or free time.
@@ -21,11 +25,17 @@ public class Tool {
 	private Long id;
 	private String name;
 	private String version;
-	private DateTime creationDate;
-
+	private Date creationDate;
 	private Category category;
 	private boolean revolutionary;
-	private final ArrayList<Person> authors = new ArrayList<Person>();
+	@RelatedTo(type = "CREATED", direction = INCOMING)
+	private final Set<Person> authors = new LinkedHashSet<Person>();
+	@RelatedTo(type = "WORKS_WITH", direction = INCOMING)
+	Set<Person> users = new LinkedHashSet<Person>();
+	@RelatedToVia(type = "WORKS_WITH", direction = INCOMING)
+	Iterable<ToolUsage> usage;
+
+
 
 	public void setName(final String name) {
 		this.name = name;
@@ -44,11 +54,11 @@ public class Tool {
 	}
 
 	public void setCreationDate(final Date creationDate) {
-		this.creationDate = new DateTime(creationDate);
+		this.creationDate = new Date(creationDate.getTime());
 	}
 
 	public Date getCreationDate() {
-		return creationDate.toDate();
+		return creationDate;
 	}
 
 	public void setCategory(final Category category) {
@@ -67,15 +77,14 @@ public class Tool {
 		return revolutionary;
 	}
 
-	public void addAuthor(final Person... authors) {
-		checkArgument(authors != null);
+	public void addAuthors(final Person... authors) {
+		checkNotNull(authors);
 		List<Person> list = asList(authors);
-		checkArgument(!list.contains(null));
 		this.authors.addAll(list);
 	}
 
-	public List<Person> getAuthors() {
-		return this.authors;
+	public Set<Person> getAuthors() {
+		return unmodifiableSet(authors);
 	}
 
 	public Long getId() {

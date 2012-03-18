@@ -6,22 +6,25 @@ import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class PersonTest {
 
 	private Person johnDoe;
 	private Mascot mascot;
 	private Person janeDoe;
-	private Tool tool;
+	private Tool maven;
 
 	@Before
 	public void setup() {
-		johnDoe = new Person("John", "Doe");
-		janeDoe = new Person("Jane", "Doe");
+		johnDoe = new Person();
+		johnDoe.setFirstName("John");
+		johnDoe.setLastName("Doe");
+		janeDoe = new Person();
+		janeDoe.setFirstName("Jane");
+		janeDoe.setLastName("Doe");
 		mascot = new Mascot();
 		mascot.setName("Elephpant");
-		tool = new Tool();
-		tool.setName("Maven");
+		maven = new Tool();
+		maven.setName("Maven");
 	}
 
 	@Test
@@ -32,7 +35,9 @@ public class PersonTest {
 
 	@Test
 	public void when_instanciating_similar_people_then_are_equal() {
-		Person johnDoeBis = new Person("John", "Doe");
+		Person johnDoeBis = new Person();
+		johnDoeBis.setFirstName("John");
+		johnDoeBis.setLastName("Doe");
 		assertThat(johnDoe).isEqualTo(johnDoeBis);
 		assertThat(johnDoe).isNotEqualTo(janeDoe);
 	}
@@ -62,7 +67,7 @@ public class PersonTest {
 	@Test
 	public void when_adding_friends_then_retrieved() {
 		johnDoe.addFriend(janeDoe);
-		assertThat(johnDoe.getFriends()).containsExactly(janeDoe);
+		assertThat(johnDoe.getFriends()).containsOnly(janeDoe);
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -72,8 +77,8 @@ public class PersonTest {
 
 	@Test
 	public void when_adding_tool_then_retrieved() {
-		johnDoe.addTool(tool);
-		assertThat(johnDoe.getTools()).containsExactly(tool);
+		johnDoe.addTool(maven);
+		assertThat(johnDoe.getTools()).containsOnly(maven);
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -97,13 +102,6 @@ public class PersonTest {
 		johnDoe.setShoeSize(80);
 	}
 	
-	@Test
-	public void when_adding_status_then_retrieved() {
-		String status = "I am hungry";
-		johnDoe.addStatus(status);
-		assertThat(johnDoe.getStatuses()).containsExactly(status);
-	}
-
 	@Test
 	public void when_setting_identity_then_retrieved() {
 		johnDoe.setProfoundIdentity(DEVELOPER);

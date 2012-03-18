@@ -37,8 +37,10 @@ public class ToolTest {
 
 	@Test
 	public void when_setting_category_then_retrieved() {
-		tool.setCategory(new Category("Software build"));
-		assertThat(tool.getCategory()).isEqualTo(new Category("Software build"));
+		Category category = new Category();
+		category.setName("Software build");
+		tool.setCategory(category);
+		assertThat(tool.getCategory()).isEqualTo(category);
 	}
 
 	@Test
@@ -49,17 +51,23 @@ public class ToolTest {
 
 	@Test
 	public void when_adding_author_then_retrieved() {
-		tool.addAuthor(new Person("John", "Doe"), new Person("Jane", "Doe"));
-		assertThat(tool.getAuthors()).containsOnly(new Person("John", "Doe"), new Person("Jane", "Doe"));
+		Person johnDoe = new Person();
+		johnDoe.setFirstName("John");
+		johnDoe.setLastName("Doe");
+		Person janeDoe = new Person();
+		janeDoe.setFirstName("Jane");
+		janeDoe.setLastName("Doe");
+		tool.addAuthors(johnDoe, janeDoe);
+		assertThat(tool.getAuthors()).containsOnly(johnDoe, janeDoe);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void when_adding_null_authors_then_exception() {
-		tool.addAuthor(null);
+		tool.addAuthors(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void when_adding_null_author_then_exception() {
-		tool.addAuthor((Person[]) null);
+		tool.addAuthors((Person[]) null);
 	}
 }

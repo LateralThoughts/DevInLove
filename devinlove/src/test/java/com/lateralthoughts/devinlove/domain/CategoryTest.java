@@ -9,7 +9,8 @@ public class CategoryTest {
 
 	@Test
 	public void when_instanciating_with_name_then_retrieved() {
-		Category category = new Category("build");
+		Category category = new Category();
+		category.setName("build");
 		assertThat(category.getName()).isEqualTo("build");
 	}
 }

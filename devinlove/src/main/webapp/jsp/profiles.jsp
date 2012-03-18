@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>DevInLove</title>
+    <title>DevInLove &middot; stars &amp; scars</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />"/>
     <script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
@@ -13,14 +13,12 @@
 <body>
 	<c:import url="/jsp/header.jsp" />
 	<div class="container">
-        <div class="hero-unit">
-		    <h1>Dev... In &hearts;!</h1>
-		    <p class="tagline">Find your soulmate programatically. Now.</p>
-		    <p>
-	    </div>
-        <div class="alert alert-info">
-        	<a class="close" data-dismiss="alert">&times;</a>
-        	Well. Actually. This is just a demo about SpringData/Neo4J. Really.
+	    <div class="row">
+           <c:forEach items="${profiles}" var="profile">
+             <li>
+             	<c:out value="${profile.firstName}" /> [<c:out value="${profile.id}" />]
+             </li>
+           </c:forEach>
 	    </div>
 	</div>
 	<c:import url="/jsp/footer.jsp" />

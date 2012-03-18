@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lateralthoughts.devinlove.domain.Mascot;
 import com.lateralthoughts.devinlove.repository.MascotRepository;
-import com.lateralthoughts.devinlove.repository.PersonRepository;
 
 @Controller
 public class HomeController {
 
-    @Autowired MascotRepository mascotRepository;
-    @Autowired PersonRepository personRepository;
+	@Autowired
+	private MascotRepository mascotRepository;
 
     @RequestMapping(value = "/index.html")
     public String index(final Model model) throws Exception {

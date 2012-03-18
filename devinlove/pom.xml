@@ -31,6 +31,7 @@
 		<compiler-plugin.version>2.3.2</compiler-plugin.version>
 		<servlet-api.version>2.5</servlet-api.version>
 		<aspectj.version>1.6.12</aspectj.version>
+		<pretty-time.version>1.0.7</pretty-time.version>
 	</properties>
 
 	<dependencies>
@@ -109,6 +110,11 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${aspectj.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ocpsoft</groupId>
+			<artifactId>ocpsoft-pretty-time</artifactId>
+			<version>${pretty-time.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -128,7 +134,7 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.26</version>
 				<configuration>
-					<scanIntervalSeconds>1</scanIntervalSeconds>
+					<scanIntervalSeconds>5</scanIntervalSeconds>
 				</configuration>
 			</plugin>
 			<plugin>
