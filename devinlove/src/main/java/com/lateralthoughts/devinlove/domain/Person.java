@@ -17,6 +17,8 @@ import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
+import org.springframework.data.neo4j.template.Neo4jOperations;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -41,9 +43,9 @@ public class Person {
 	 */
 	private int shoeSize;
 
-//	@Fetch
 	@RelatedToVia(elementClass = StatusRedaction.class, type = "WRITES", direction = OUTGOING)
-	private final Collection<StatusRedaction> statuses = new LinkedList<StatusRedaction>();
+    @Fetch
+	private Iterable<StatusRedaction> statuses;
 
 	private ProfoundIdentity profoundIdentity;
 
@@ -108,11 +110,12 @@ public class Person {
 		return statuses;
 	}
 
-	public StatusRedaction addStatus(final Status message, final Date creationDate) {
-		final StatusRedaction statusRedaction = new StatusRedaction(this, message, creationDate);
-		statuses.add(statusRedaction);
-		return statusRedaction;
-	}
+    public StatusRedaction addStatus(Neo4jOperations template, Status message, final Date creationDate) {
+        final StatusRedaction statusRedaction = template.createRelationshipBetween(this,
+                message, StatusRedaction.class, "WRITES", false);
+        statusRedaction.setCreationDate(creationDate);
+        return template.save(statusRedaction);
+    }
 
 	public void setProfoundIdentity(final ProfoundIdentity profoundIdentity) {
 		//checkNotNull(profoundIdentity);

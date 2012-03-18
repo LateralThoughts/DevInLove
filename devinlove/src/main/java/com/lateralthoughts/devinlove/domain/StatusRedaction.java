@@ -14,10 +14,8 @@ import com.ocpsoft.pretty.time.PrettyTime;
 public class StatusRedaction {
 	@GraphId
 	private Long id;
-	@StartNode
-	private Person author;
-	@EndNode
-	private Status status = new Status("");
+	@StartNode private Person author;
+	@EndNode private Status status;
 	private Date creationDate = new Date();
 
 	public StatusRedaction() {}
@@ -55,6 +53,10 @@ public class StatusRedaction {
 	public Date getCreationDate() {
 		return creationDate;
 	}
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
 	// shouldnt be here, I know...
 	public String getFormattedDate() {

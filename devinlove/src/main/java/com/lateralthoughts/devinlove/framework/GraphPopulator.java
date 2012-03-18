@@ -5,16 +5,14 @@ import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
 import java.util.Date;
 
 import com.lateralthoughts.devinlove.domain.*;
+import com.lateralthoughts.devinlove.repository.*;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.data.neo4j.template.Neo4jOperations;
 import org.springframework.stereotype.Service;
-
-import com.lateralthoughts.devinlove.repository.CategoryRepository;
-import com.lateralthoughts.devinlove.repository.MascotRepository;
-import com.lateralthoughts.devinlove.repository.PersonRepository;
-import com.lateralthoughts.devinlove.repository.ToolRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent> {
@@ -27,12 +25,17 @@ public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent
 	private ToolRepository toolRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
+    @Autowired
+    private Neo4jOperations template;
+    @Autowired
+    private StatusRepository statusRepository;
 
 	@Override
 	public void onApplicationEvent(final ContextRefreshedEvent event) {
 		loadData();
 	}
 
+    @Transactional
 	public void loadData() {
 		lockABunchOfMascotsInCagesBwahaha();
 		createToolCategories();
@@ -42,7 +45,7 @@ public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent
 
 	/**
 	 * thanks Wikipedia! :)
-	 * @see http://en.wikipedia.org/wiki/List_of_mascots
+	 * voir http://en.wikipedia.org/wiki/List_of_mascots
 	 */
 	private void lockABunchOfMascotsInCagesBwahaha() {
 		mascotRepository.save(mascot("Django Pony"));
@@ -77,9 +80,18 @@ public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent
 	}
 
 	private void loadABunchOfPeopleIntoTheMatrix() {
-		personRepository.save(person("Florent", "Biville", "blue", "Tux", DEVELOPER, 42, "Hello world", "Java Standard Edition"));
-		personRepository.save(person("Olivier", "Girardot", "green", "Django Pony", DEVELOPER, 45, "A World Appart (Info)", "Python"));
-	}
+        Person p = person("Florent", "Biville", "blue", "Tux", DEVELOPER, 42, "Hello world", "Java Standard Edition");
+		personRepository.save(p);
+        Status s = new Status("Associé chez Lateral-Thoughts");
+        statusRepository.save(s);
+        p.addStatus(template, s, new Date());
+        p = person("Olivier", "Girardot", "green", "Django Pony", DEVELOPER, 45, "A World Appart (Info)", "Python");
+        personRepository.save(p);
+        s = new Status("CTO APPARTINFO et Associé LT");
+        statusRepository.save(s);
+        p.addStatus(template, s, new Date());
+
+    }
 
 	private Category category(final String name) {
 		Category category = new Category();
@@ -96,7 +108,6 @@ public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent
 		//person.setProfoundIdentity(profoundIdentity);
 		person.setShoeSize(shoeSize);
 		// person.addTool(findTool(toolName));
-		person.addStatus(new Status("Hello world"), new Date());
 		return person;
 	}
 

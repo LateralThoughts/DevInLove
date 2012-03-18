@@ -17,6 +17,6 @@ public class StatusService {
 	private Neo4jOperations template;
 
 	public void saveNewStatus(final Status status, final Person author) {
-		template.createRelationshipBetween(author, status, StatusRedaction.class, "WRITES", false);
+		template.createRelationshipBetween(author, status, StatusRedaction.class, "WRITES", true);
 	}
 }

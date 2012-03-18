@@ -1,13 +1,20 @@
 package com.lateralthoughts.devinlove.domain;
 
+import org.neo4j.graphdb.Direction;
+import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedToVia;
 
 @NodeEntity
 public class Status {
 	@GraphId
 	private Long id;
 	private String message = "";
+    
+    @RelatedToVia(type = "WRITES", direction = Direction.INCOMING)
+    @Fetch private Iterable<StatusRedaction> statuses;
+
 
 	public Status() {}
 
