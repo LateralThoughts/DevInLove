@@ -1,6 +1,6 @@
 package com.lateralthoughts.devinlove.domain;
 
-import static com.lateralthoughts.devinlove.domain.Person.ProfoundIdentity.DEVELOPER;
+import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
 import static org.fest.assertions.Assertions.assertThat;
 
 import org.junit.Before;
