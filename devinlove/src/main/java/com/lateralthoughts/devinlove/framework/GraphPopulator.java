@@ -1,20 +1,16 @@
 package com.lateralthoughts.devinlove.framework;
 
-import static com.lateralthoughts.devinlove.domain.Person.ProfoundIdentity.DEVELOPER;
+import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
 
 import java.util.Date;
 
+import com.lateralthoughts.devinlove.domain.*;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
-import com.lateralthoughts.devinlove.domain.Category;
-import com.lateralthoughts.devinlove.domain.Mascot;
-import com.lateralthoughts.devinlove.domain.Person;
-import com.lateralthoughts.devinlove.domain.Status;
-import com.lateralthoughts.devinlove.domain.Tool;
 import com.lateralthoughts.devinlove.repository.CategoryRepository;
 import com.lateralthoughts.devinlove.repository.MascotRepository;
 import com.lateralthoughts.devinlove.repository.PersonRepository;
@@ -91,13 +87,13 @@ public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent
 		return category;
 	}
 
-	private Person person(final String firstName, final String lastName, final String color, final String mascotName, final Person.ProfoundIdentity profoundIdentity, final int shoeSize, final String firstStatus, final String toolName) {
+	private Person person(final String firstName, final String lastName, final String color, final String mascotName, final ProfoundIdentity profoundIdentity, final int shoeSize, final String firstStatus, final String toolName) {
 		Person person = new Person();
 		person.setFavoriteColor(color);
 		person.setFirstName(firstName);
 		person.setLastName(lastName);
 		person.setMascot(findMascot(mascotName));
-		person.setProfoundIdentity(profoundIdentity);
+		//person.setProfoundIdentity(profoundIdentity);
 		person.setShoeSize(shoeSize);
 		// person.addTool(findTool(toolName));
 		person.addStatus(new Status("Hello world"), new Date());

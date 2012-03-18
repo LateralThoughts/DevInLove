@@ -25,9 +25,6 @@ import org.springframework.data.neo4j.annotation.RelatedToVia;
 @NodeEntity
 public class Person {
 
-	public enum ProfoundIdentity {
-		DEVELOPER, ARCHITECT, SYSADMIN, MANAGER, BOSS;
-	}
 
 	@GraphId
 	private Long id;
@@ -44,7 +41,7 @@ public class Person {
 	 */
 	private int shoeSize;
 
-	@Fetch
+//	@Fetch
 	@RelatedToVia(elementClass = StatusRedaction.class, type = "WRITES", direction = OUTGOING)
 	private final Collection<StatusRedaction> statuses = new LinkedList<StatusRedaction>();
 
@@ -118,7 +115,7 @@ public class Person {
 	}
 
 	public void setProfoundIdentity(final ProfoundIdentity profoundIdentity) {
-		checkNotNull(profoundIdentity);
+		//checkNotNull(profoundIdentity);
 		this.profoundIdentity = profoundIdentity;
 	}
 
