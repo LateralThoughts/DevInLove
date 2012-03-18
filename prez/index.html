@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	
-	<title>SpringData / Neo4j in action</title>
+	<title>SpringData / Neo4j en action</title>
 	
 	<meta name="author" content="Florent Biville">
 	<meta name="author" content="Olivier Girardot">
@@ -30,67 +30,126 @@
 	<script src="js/modernizr.custom.js"></script>
 </head>
 <body class="deck-container">
+
+
 	<section class="slide" id="begin">
-	<h1>SpringData / Neo4j</h1>
-</section>
+		<h1>Introduction à SpringData / Neo4j</h1>
+	</section>
 
 
-<section class="slide" id="how-to-overview">
-	<h2>Le plan</h2>
-	<ol>
-		<li>
-			<h3>Write Slides</h3>
-			<p>Slide content is simple&nbsp;HTML.</p>
-		</li>
-		<li>
-			<h3>Choose Themes</h3>
-			<p>One for slide styles and one for deck&nbsp;transitions.</p>
-		</li>
-		<li>
-			<h3>Include Extensions</h3>
-			<p>Add extra functionality to your deck, or leave it stripped&nbsp;down.</p>
-		</li>
-	</ol>
-</section>
+	<section class="slide" id="minute-pub">
+		<h2>Qui sommes-nous ?</h2>
+		<ul>
+			<li>
+				<h3>Olivier Girardot</h3>
+				<ul>
+					<li>Associé/fondateur de <a href="http://www.lateral-thoughts.com/">Lateral Thoughts</a></li>
+					<li>Fondateur d'AppartInfo.com</li>
+					<li><a href="https://twitter.com/#!/ogirardot">@ogirardot</a></li>
+				</ul>
+			</li>
+			<li>
+				<h3>Florent Biville</h3>
+				<ul>
+					<li>Développeur à <a href="http://www.lateral-thoughts.com/">Lateral Thoughts</a></li>
+					<li>Finaliste malheureux de CodeStory ;(</li>
+					<li><a href="https://twitter.com/#!/fbiville">@fbiville</a></li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide" id="plan">
+		<h2>Plan</h2>
+		<ol>
+			<li>
+				<h3>La mouvance NOSQL</h3>
+			</li>
+			<li>
+				<h3>Présentation de Neo4J</h3>
+			</li>
+			<li>
+				<h3>Présentation de SpringData</h3>
+			</li>
+			<li>
+				<h3>DevInLove</h3>
+			</li>
+			<li>
+				<h3>Utilisation sur l'existant</h3>
+			</li>
+			<li>
+				<h3>Déploiement</h3>
+			</li>
+		</ol>
+	</section>
+	
+	<section class="slide" id="nosql">
+		<h1>La mouvance NOSQL</h1>
+	</section>
+	
+	<section class="slide" id="presentation-de-neo4j">
+		<h1>Présentation de Neo4J</h1>
+	</section>
+	
+	<section class="slide" id="presentation-de-springdata">
+		<h1>Présentation de SpringData</h1>
+	</section>
+	
+	<section class="slide" id="devinlove">
+		<h1>DevInLove</h1>
+	</section>
+	
+	<section class="slide" id="neo4j-et-existant">
+		<h1>Utilisation sur l'existant</h1>
+	</section>
+	
+	<section class="slide" id="deploiement">
+		<h1>Déploiement</h1>
+	</section>
+	
+	<section class="slide" id="deploiement">
+		<h1>Conclusion</h1>
+	</section>
 
 
-<!-- deck.navigation snippet -->
-<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
-<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+	<!-- deck.navigation snippet -->
+	<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+	<a href="#" class="deck-next-link" title="Next">&#8594;</a>
 
-<!-- deck.status snippet -->
-<p class="deck-status">
-	<span class="deck-status-current"></span>
-	/
-	<span class="deck-status-total"></span>
-</p>
+	<!-- deck.status snippet -->
+	<p class="deck-status">
+		<span class="deck-status-current"></span> / <span
+			class="deck-status-total"></span>
+	</p>
 
-<!-- deck.goto snippet -->
-<form action="." method="get" class="goto-form">
-	<label for="goto-slide">Go to slide:</label>
-	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
-	<datalist id="goto-datalist"></datalist>
-	<input type="submit" value="Go">
-</form>
+	<!-- deck.goto snippet -->
+	<form action="." method="get" class="goto-form">
+		<label for="goto-slide">Go to slide:</label> <input type="text"
+			name="slidenum" id="goto-slide" list="goto-datalist">
+		<datalist id="goto-datalist"></datalist>
+		<input type="submit" value="Go">
+	</form>
 
-<!-- deck.hash snippet -->
-<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+	<!-- deck.hash snippet -->
+	<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
 
 
-<!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
-<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/jquery-1.7.min.js"><\/script>')</script>
+	<!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
+	<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+	<script>
+		window.jQuery || document.write('<script src="js/jquery-1.7.min.js"><\/script>')
+	</script>
 
-<!-- Deck Core and extensions -->
-<script src="core/deck.core.js"></script>
-<script src="extensions/hash/deck.hash.js"></script>
-<script src="extensions/menu/deck.menu.js"></script>
-<script src="extensions/goto/deck.goto.js"></script>
-<script src="extensions/status/deck.status.js"></script>
-<script src="extensions/navigation/deck.navigation.js"></script>
+	<!-- Deck Core and extensions -->
+	<script src="core/deck.core.js"></script>
+	<script src="extensions/hash/deck.hash.js"></script>
+	<script src="extensions/menu/deck.menu.js"></script>
+	<script src="extensions/goto/deck.goto.js"></script>
+	<script src="extensions/status/deck.status.js"></script>
+	<script src="extensions/navigation/deck.navigation.js"></script>
 
-<!-- Initialize the deck -->
-<script>
+	<!-- Initialize the deck -->
+	<script>
 $(function() {
 	$.deck('.slide');
 });
