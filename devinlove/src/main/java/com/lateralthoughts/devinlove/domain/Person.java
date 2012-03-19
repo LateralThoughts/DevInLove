@@ -1,15 +1,12 @@
 package com.lateralthoughts.devinlove.domain;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Collections.unmodifiableSet;
 import static org.neo4j.graphdb.Direction.BOTH;
 import static org.neo4j.graphdb.Direction.OUTGOING;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 import org.springframework.data.neo4j.annotation.Fetch;
@@ -18,7 +15,6 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
 import org.springframework.data.neo4j.template.Neo4jOperations;
-import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -26,8 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @NodeEntity
 public class Person {
-
-
 	@GraphId
 	private Long id;
 	private String firstName;
@@ -35,9 +29,9 @@ public class Person {
 	private String favoriteColor;
 	private Mascot mascot;
 	@RelatedTo(elementClass = Person.class, type = "IS_FRIEND_WITH", direction = BOTH)
-	private final Set<Person> friends = new LinkedHashSet<Person>();
+	private Set<Person> friends = new LinkedHashSet<Person>();
 	@RelatedTo(elementClass = Tool.class, type = "WORKS_WITH", direction = OUTGOING)
-	private final Set<Tool> tools = new LinkedHashSet<Tool>();
+	private Set<Tool> tools = new LinkedHashSet<Tool>();
 	/**
 	 * Simplistic European-formatted shoe size
 	 */
@@ -45,9 +39,9 @@ public class Person {
 
 	@RelatedToVia(elementClass = StatusRedaction.class, type = "WRITES", direction = OUTGOING)
     @Fetch
-	private Iterable<StatusRedaction> statuses;
+	private Set<StatusRedaction> statuses = new LinkedHashSet<StatusRedaction>();
 
-	private ProfoundIdentity profoundIdentity;
+	private String profoundIdentity;
 
 	public Long getId() {
 		return id;
@@ -97,7 +91,6 @@ public class Person {
 	}
 
 	public void setShoeSize(final int shoeSize) {
-		checkArgument(shoeSize > 0 && shoeSize < 80);
 		this.shoeSize = shoeSize;
 	}
 
@@ -110,19 +103,17 @@ public class Person {
 		return statuses;
 	}
 
-    public StatusRedaction addStatus(Neo4jOperations template, Status message, final Date creationDate) {
-        final StatusRedaction statusRedaction = template.createRelationshipBetween(this,
-                message, StatusRedaction.class, "WRITES", false);
-        statusRedaction.setCreationDate(creationDate);
-        return template.save(statusRedaction);
+	public StatusRedaction addStatus(final Neo4jOperations template, final Status message, final Date creationDate) {
+		final StatusRedaction statusRedaction = template.createRelationshipBetween(this, message, StatusRedaction.class, "WRITES", false);
+		statuses.add(statusRedaction);
+		return statusRedaction;
     }
 
 	public void setProfoundIdentity(final ProfoundIdentity profoundIdentity) {
-		//checkNotNull(profoundIdentity);
-		this.profoundIdentity = profoundIdentity;
+		this.profoundIdentity = profoundIdentity.toString();
 	}
 
-	public ProfoundIdentity getProfoundIdentity() {
+	public String getProfoundIdentity() {
 		return profoundIdentity;
 	}
 

@@ -1,11 +1,15 @@
 package com.lateralthoughts.devinlove.domain;
 
+import static com.lateralthoughts.devinlove.domain.Relationships.WRITES;
+
 import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.data.neo4j.annotation.EndNode;
+import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.RelationshipEntity;
+import org.springframework.data.neo4j.annotation.RelationshipType;
 import org.springframework.data.neo4j.annotation.StartNode;
 
 import com.ocpsoft.pretty.time.PrettyTime;
@@ -14,8 +18,14 @@ import com.ocpsoft.pretty.time.PrettyTime;
 public class StatusRedaction {
 	@GraphId
 	private Long id;
-	@StartNode private Person author;
-	@EndNode private Status status;
+	@StartNode
+	@Fetch
+	private Person author;
+	@EndNode
+	@Fetch
+	private Status status;
+	@RelationshipType
+	private final Relationships type = WRITES;
 	private Date creationDate = new Date();
 
 	public StatusRedaction() {}
@@ -54,7 +64,7 @@ public class StatusRedaction {
 		return creationDate;
 	}
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(final Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -88,6 +98,10 @@ public class StatusRedaction {
 		else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Relationships getType() {
+		return type;
 	}
 
 }

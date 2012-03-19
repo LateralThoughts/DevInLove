@@ -4,8 +4,6 @@ import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
 
 import java.util.Date;
 
-import com.lateralthoughts.devinlove.domain.*;
-import com.lateralthoughts.devinlove.repository.*;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -14,7 +12,20 @@ import org.springframework.data.neo4j.template.Neo4jOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lateralthoughts.devinlove.domain.Category;
+import com.lateralthoughts.devinlove.domain.Mascot;
+import com.lateralthoughts.devinlove.domain.Person;
+import com.lateralthoughts.devinlove.domain.ProfoundIdentity;
+import com.lateralthoughts.devinlove.domain.Status;
+import com.lateralthoughts.devinlove.domain.Tool;
+import com.lateralthoughts.devinlove.repository.CategoryRepository;
+import com.lateralthoughts.devinlove.repository.MascotRepository;
+import com.lateralthoughts.devinlove.repository.PersonRepository;
+import com.lateralthoughts.devinlove.repository.StatusRepository;
+import com.lateralthoughts.devinlove.repository.ToolRepository;
+
 @Service
+@Transactional
 public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
@@ -105,7 +116,7 @@ public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent
 		person.setFirstName(firstName);
 		person.setLastName(lastName);
 		person.setMascot(findMascot(mascotName));
-		//person.setProfoundIdentity(profoundIdentity);
+		person.setProfoundIdentity(profoundIdentity);
 		person.setShoeSize(shoeSize);
 		// person.addTool(findTool(toolName));
 		return person;
