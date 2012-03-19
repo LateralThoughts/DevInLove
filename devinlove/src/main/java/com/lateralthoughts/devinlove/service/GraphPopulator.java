@@ -1,6 +1,7 @@
 package com.lateralthoughts.devinlove.service;
 
 import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
+import static com.lateralthoughts.devinlove.domain.ToolAffinity.LOVE;
 
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import com.lateralthoughts.devinlove.domain.Person;
 import com.lateralthoughts.devinlove.domain.ProfoundIdentity;
 import com.lateralthoughts.devinlove.domain.Status;
 import com.lateralthoughts.devinlove.domain.Tool;
+import com.lateralthoughts.devinlove.domain.ToolAffinity;
 import com.lateralthoughts.devinlove.repository.CategoryRepository;
 import com.lateralthoughts.devinlove.repository.MascotRepository;
 import com.lateralthoughts.devinlove.repository.PersonRepository;
@@ -79,10 +81,10 @@ public class GraphPopulator {
 	}
 
 	private void loadABunchOfPeopleIntoTheMatrix() {
-        Person florent = person("Florent", "Biville", "blue", "Tux", DEVELOPER, 42, "Hello world", "Java Standard Edition");
+		Person florent = person("Florent", "Biville", "blue", "Tux", DEVELOPER, 42, "Hello world", LOVE, "Java Standard Edition");
 		personRepository.save(florent);
 		statusService.saveNewStatus(new Status("Associé chez Lateral-Thoughts"), florent);
-		Person olivier = person("Olivier", "Girardot", "green", "Django Pony", DEVELOPER, 45, "A World Appart (Info)", "Python");
+		Person olivier = person("Olivier", "Girardot", "green", "Django Pony", DEVELOPER, 45, "A World Appart (Info)", LOVE, "Python");
 		personRepository.save(olivier);
 		statusService.saveNewStatus(new Status("Fondateur et associé chez Lateral-Thoughts"), olivier);
 
@@ -94,7 +96,7 @@ public class GraphPopulator {
 		return category;
 	}
 
-	private Person person(final String firstName, final String lastName, final String color, final String mascotName, final ProfoundIdentity profoundIdentity, final int shoeSize, final String firstStatus, final String toolName) {
+	private Person person(final String firstName, final String lastName, final String color, final String mascotName, final ProfoundIdentity profoundIdentity, final int shoeSize, final String firstStatus, final ToolAffinity affinity, final String toolName) {
 		Person person = new Person();
 		person.setFavoriteColor(color);
 		person.setFirstName(firstName);
@@ -102,13 +104,13 @@ public class GraphPopulator {
 		person.setMascot(findMascot(mascotName));
 		person.setProfoundIdentity(profoundIdentity);
 		person.setShoeSize(shoeSize);
-		// person.addTool(findTool(toolName));
+		person.addTool(findTool(toolName), affinity);
 		return person;
 	}
 
-	// private Tool findTool(final String toolname) {
-	// return toolRepository.findByPropertyValue("name", toolname);
-	// }
+	private Tool findTool(final String toolname) {
+		return toolRepository.findByPropertyValue("name", toolname);
+	}
 
 	private Mascot findMascot(final String mascotName) {
 		return mascotRepository.findByPropertyValue("name", mascotName);

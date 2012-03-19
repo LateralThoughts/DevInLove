@@ -1,15 +1,19 @@
 package com.lateralthoughts.devinlove.domain;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 
 /**
  * Mascot ! Because everything has a Mascot !
  */
 @NodeEntity
+@TypeAlias("mascot")
 public class Mascot {
 	@GraphId
 	private Long id;
+	@Indexed
 	private String name;
 
     public Long getId() {

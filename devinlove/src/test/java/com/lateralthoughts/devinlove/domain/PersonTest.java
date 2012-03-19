@@ -76,32 +76,11 @@ public class PersonTest {
 	}
 
 	@Test
-	public void when_adding_tool_then_retrieved() {
-		johnDoe.addTool(maven);
-		assertThat(johnDoe.getTools()).containsOnly(maven);
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void when_adding_null_tool_then_exception() {
-		johnDoe.addTool(null);
-	}
-
-	@Test
 	public void when_setting_shoe_size_then_retrieved() {
 		johnDoe.setShoeSize(42);
 		assertThat(johnDoe.getShoeSize()).isEqualTo(42);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void when_setting_negative_shoe_size_then_exception() {
-		johnDoe.setShoeSize(-50);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void when_setting_too_large_shoe_size_then_exception() {
-		johnDoe.setShoeSize(80);
-	}
-	
 	@Test
 	public void when_setting_identity_then_retrieved() {
 		johnDoe.setProfoundIdentity(DEVELOPER);

@@ -3,7 +3,7 @@ h1, .tagline { text-align:center;}
 #profile-heading { overflow:auto;}
 #profile-headings { margin:0;padding-left:15px;}
 #profile-headings h1 { margin:0; margin-top:15px; text-align:left;}
-#personal-info-block { margin:0; border:1px solid #DDD; min-height:140px; padding:10px; font-size:9pt;}
+#personal-info-block { margin:0; border:3px dashed #DDD; min-height:140px; padding:10px; font-size:9pt;}
 #personal-info-block h3 { font-size:11pt; font-variant:small-caps;}
 .love { color:red;}
 input { height:auto !important;}

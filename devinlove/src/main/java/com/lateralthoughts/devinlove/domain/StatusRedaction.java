@@ -5,6 +5,7 @@ import static com.lateralthoughts.devinlove.domain.Relationships.WRITES;
 import java.util.Date;
 import java.util.Locale;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.neo4j.annotation.EndNode;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
@@ -15,6 +16,7 @@ import org.springframework.data.neo4j.annotation.StartNode;
 import com.ocpsoft.pretty.time.PrettyTime;
 
 @RelationshipEntity(type = "WRITES")
+@TypeAlias("status_redaction")
 public class StatusRedaction {
 	@GraphId
 	private Long id;

@@ -10,7 +10,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
@@ -20,9 +23,11 @@ import org.springframework.data.neo4j.annotation.RelatedToVia;
  * Can be a programming language, a framework, a piece of software...
  */
 @NodeEntity
+@TypeAlias("tool")
 public class Tool {
 	@GraphId
 	private Long id;
+	@Indexed
 	private String name;
 	private String version;
 	private Date creationDate;
@@ -33,9 +38,14 @@ public class Tool {
 	@RelatedTo(type = "WORKS_WITH", direction = INCOMING)
 	Set<Person> users = new LinkedHashSet<Person>();
 	@RelatedToVia(type = "WORKS_WITH", direction = INCOMING)
-	Iterable<ToolUsage> usage;
+	@Fetch
+	private Iterable<ToolUsage> usage;
 
 
+
+	public Iterable<ToolUsage> getUsage() {
+		return usage;
+	}
 
 	public void setName(final String name) {
 		this.name = name;

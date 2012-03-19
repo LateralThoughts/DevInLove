@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
@@ -20,6 +21,7 @@ import org.springframework.data.neo4j.annotation.RelatedToVia;
  * We are all human (almost).
  */
 @NodeEntity
+@TypeAlias("person")
 public class Person {
 	@GraphId
 	private Long id;
@@ -30,8 +32,9 @@ public class Person {
 	private Mascot mascot;
 	@RelatedTo(elementClass = Person.class, type = "IS_FRIEND_WITH", direction = BOTH)
 	private Set<Person> friends = new LinkedHashSet<Person>();
-	@RelatedTo(elementClass = Tool.class, type = "WORKS_WITH", direction = OUTGOING)
-	private Set<Tool> tools = new LinkedHashSet<Tool>();
+
+	@RelatedToVia(elementClass = ToolUsage.class, type = "WORKS_WITH", direction = OUTGOING)
+	private Set<ToolUsage> tools = new LinkedHashSet<ToolUsage>();
 	/**
 	 * Simplistic European-formatted shoe size
 	 */
@@ -81,13 +84,13 @@ public class Person {
 		friends.add(friend);
 	}
 
-	public void addTool(final Tool tool) {
-		checkNotNull(tool);
-		tools.add(tool);
+	public void addTool(final Tool tool, final ToolAffinity affinity) {
+		final ToolUsage toolUsage = new ToolUsage(this, tool, affinity);
+		tools.add(toolUsage);
 	}
 
-	public Set<Tool> getTools() {
-		return unmodifiableSet(tools);
+	public Iterable<ToolUsage> getTools() {
+		return tools;
 	}
 
 	public void setShoeSize(final int shoeSize) {
@@ -98,15 +101,13 @@ public class Person {
 		return shoeSize;
 	}
 
-
 	public Iterable<StatusRedaction> getStatuses() {
 		return statuses;
 	}
 
-	public StatusRedaction addStatus(final Status message, final Date creationDate) {
+	public void addStatus(final Status message, final Date creationDate) {
 		final StatusRedaction statusRedaction = new StatusRedaction(this, message, creationDate);
 		statuses.add(statusRedaction);
-		return statusRedaction;
     }
 
 	public void setProfoundIdentity(final ProfoundIdentity profoundIdentity) {

@@ -49,19 +49,26 @@ public class PersonController {
 	}
 
 	@RequestMapping(value = "/profile-{id}.html", method = GET)
-	public ModelAndView displayProfile(@PathVariable("id") final long island /* ahah */, @RequestParam(value = "p", defaultValue = "1") int page) {
-		if (page < 1)
-			page = 1;
+	public ModelAndView displayProfile(@PathVariable("id") final long island /* ahah */, @RequestParam(value = "p", defaultValue = "1") int statusPage) {
+		if (statusPage < 1)
+			statusPage = 1;
 		ModelAndView modelAndView = new ModelAndView("profile");
 		Person person = retrievePerson(island);
 		modelAndView.addObject("guy", person);
+		modelAndView.addObject("statusCommand", new Status(""));
+		retrieveStatuses(statusPage, modelAndView, person);
+		// modelAndView.addObject("tools",
+		// personRepository.findTools(person.getId()));
+		return modelAndView;
+	}
+
+
+	private void retrieveStatuses(final int page, final ModelAndView modelAndView, final Person person) {
 		Page<StatusRedaction> sortedStatuses = personRepository.findSortedStatuses(person.getId(), new PageRequest(page - 1, 10));
 		modelAndView.addObject("statuses", sortedStatuses.getContent());
 		modelAndView.addObject("statusCurrentPage", sortedStatuses.getNumber() + 1);
 		modelAndView.addObject("hasPreviousPage", sortedStatuses.hasPreviousPage());
 		modelAndView.addObject("hasNextPage", sortedStatuses.hasNextPage());
-		modelAndView.addObject("statusCommand", new Status(""));
-		return modelAndView;
 	}
 
 	@RequestMapping(value = "/profile-{id}.html", method = POST)

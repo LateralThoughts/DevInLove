@@ -31,6 +31,24 @@
 				<dt>Cannot live without</dt>
 				<dd><c:out value="${guy.mascot.name}" /></dd>
 			</dl>
+<!-- 			<h3>My Tools</h3> -->
+<%-- 			<c:choose> --%>
+<%-- 				<c:when test="${empty guy.tools}"> --%>
+<!-- 					<p>No tools. I code with my feet anyway.</p> -->
+<%-- 				</c:when> --%>
+<%-- 				<c:otherwise> --%>
+<!-- 					<dl class="dl-horizontal"> -->
+<%-- 					<c:forEach items="${tools}" var="tool"> --%>
+<%-- 							<dt>&ldquo;<c:out value="${tool.tool.name}" /> (v<c:out value="${tool.tool.version}" />)</dt> --%>
+<!-- 							<dd> -->
+<%-- 								<small> --%>
+<%-- 									and I <c:out value="${tool.affinity}" /> it! --%>
+<%-- 								</small> --%>
+<!-- 							</dd> -->
+<%-- 					</c:forEach> --%>
+<!-- 					</dl> -->
+<%-- 				</c:otherwise> --%>
+<%-- 			</c:choose> --%>
 		</div>
 		
 		<div id="misc-block" class="pull-right">

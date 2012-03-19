@@ -1,9 +1,11 @@
 package com.lateralthoughts.devinlove.domain;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 
 @NodeEntity
+@TypeAlias("category")
 public class Category {
 	@GraphId
 	private Long id;
