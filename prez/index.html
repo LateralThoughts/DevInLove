@@ -158,30 +158,29 @@
 		Les bases de données Graphes :
 		<div style="clear:both"/>
 		<ul style="float:left">
-		  <li>AllegroGraph</li>
-<li>Bigdata</li>
-<li>CloudGraph</li>
-<li>Cytoscape</li>
-<li>DEX</li>
-<li>Filament</li>
-<li>GraphBase</li>
-<li>Graphd</li>
-<li>Horton</li>
-<li>HyperGraphDB</li>
+			<li>AllegroGraph</li>
+			<li>Bigdata</li>
+			<li>CloudGraph</li>
+			<li>Cytoscape</li>
+			<li>DEX</li>
+			<li>Filament</li>
+			<li>GraphBase</li>
+			<li>Graphd</li>
+			<li>Horton</li>
+			<li>HyperGraphDB</li>
 		</ul>
 		<ul style="float:right">
-
-<li>InfiniteGraph</li>
-<li>InfoGrid</li>
-<li><b>Neo4j</b></li>
-<li>OrientDB</li>
-<li>OQGRAPH</li>
-<li>sones GraphDB</li>
-<li>VertexDB</li>
-<li>Virtuoso Universal Server</li>
-<li>R2DF</li>
-<li>GiraffeDB</li>
-</ul>
+			<li>InfiniteGraph</li>
+			<li>InfoGrid</li>
+			<li><b>Neo4j</b></li>
+			<li>OrientDB</li>
+			<li>OQGRAPH</li>
+			<li>sones GraphDB</li>
+			<li>VertexDB</li>
+			<li>Virtuoso Universal Server</li>
+			<li>R2DF</li>
+			<li>GiraffeDB</li>
+		</ul>
 	</section>
 
 	<section class="slide" id="nosql-cap">
@@ -198,16 +197,118 @@
 		<h1>Présentation de Neo4J</h1>
 	</section>
 	
-	<section class="slide" id="plan">
-		<h2>BDD orientée graphe: pourquoi faire ?</h2>
-		<ul style="float:left">
+	<section class="slide" id="mais-pourquoi-faire">
+		<h2>Pourquoi Neo4J ?</h2>
+		<ul>
+			<li>Base de données écrite en Java</li>
+			<li>Projet(s) <a href="https://github.com/neo4j/">open-source</a> (licence <a href="http://en.wikipedia.org/wiki/Affero_General_Public_License">AGPL</a>)</li>
+			<li>Supportée commercialement par <a href="http://neotechnology.com/">Neo Technology</a></li>
+			<li>Rapprochement récent de SpringSource</li>
+		</ul>
+		<h2>Roadmap</h2>
+		<ul>
+			<li>Version stable: 1.6</li>
+			<li>1.7 prévue fin Mars 2012</li>
+		</ul>
+	</section>
+	
+	<section class="slide" id="mais-pourquoi-faire-bis">
+		<h2>BDD orientée graphe ?</h2>
+		<ul>
 			<li>Données fortement inter-connectées</li>
 			<li>Les Graphes représentent bien un modèle Objet</li>
-			<li>Est plus facilement scalable qu'un SGBDR, Pas de Jointure coûteuses</li>
+			<li>Est plus facilement scalable qu'un SGBDR, pas de jointures coûteuses</li>
 			<li>Modèle rempli d'algorithmes efficaces <br/>et bien connus en Recherche Opérationnelle</li>
 			<li>Flexible et souvent Schema-Less</li>
 		</ul>
-		<img style="float:right" src="img/graphdb-GVE.svg"/>
+	</section>
+	
+	<section class="slide" id="concepts-basics">
+		<h2>Concepts I &middot; 3 choses à retenir</h2>
+		<ul style="float:left">
+			<li class="slide">
+				<h3>Noeud <small>(vertex, node)</small></h3>
+				<p>La forme la plus simple d'un graphe.</p>
+					<code>Node iAmANode = graphDatastore.createNode();</code>
+			</li>
+			<li class="slide">
+				<h3>Relation <small>(relationship, edge)</small></h3>
+				<p>Permet d'organiser les noeuds.</p>
+					<code>iAmANode.createRelationshipTo(anotherNode, ExampleRelationships.ROMANTIC);</code>
+			</li>
+			<li class="slide">
+				<h3>Propriété <small>(property, key/value pairs)</small></h3>
+				<p>Enrichit les noeuds <strong>et les relations</strong>.</p>
+					<code>iAmANode.setProperty("having", "a property!");</code>
+			</li>
+		</ul>
+	</section>
+	
+	<section class="slide" id="neo4j-code-bases">
+		<h2>Concepts I &middot; in da code</h2>
+		<pre>
+			<code>
+private GraphDatabaseService graphDatastore = new EmbeddedGraphDatabase(PATH);
+  
+public void demonstration() {
+	Transaction transaction = graphDatastore.beginTx();
+	try {
+		Node iAmANode = graphDatastore.createNode();
+		iAmANode.setProperty("name", "whatever");
+		Node anotherNode = graphDatastore.createNode();
+		iAmANode.createRelationshipTo(anotherNode, ROMANTIC);
+		transaction.success();
+	}
+	catch (Exception e) {
+		transaction.failure();
+	}
+	finally {
+		transaction.finish();
+	}
+}
+			</code>
+		</pre>
+	</section>
+	
+	<section class="slide" id="concepts-suite">
+		<h2>Concepts II &middot; traversée de graphe</h2>
+		<p>Quizz: combien de noeuds sont retournés ?</p>
+		<pre>
+			<code>
+Traverser traverser = iAmANode.traverse(BREADTH_FIRST, DEPTH_ONE, 
+	new ReturnableEvaluator() {
+		@Override
+		public boolean isReturnableNode(TraversalPosition position) {
+			Node currentNode = position.currentNode();
+			return currentNode.hasRelationship(ROMANTIC, BOTH);
+		}
+	}, 
+ROMANTIC, BOTH);
+	
+for (Node node : traverser.getAllNodes()) {
+	System.out.println(node.getProperty("name"));
+}
+			</code>
+		</pre>
+		<p>Possibilités d'utiliser des langages comme Cypher ou Gremlin...</p>
+	</section>
+	
+	<section class="slide" id="concepts-end">
+		<h2>Concepts III &middot; Index</h2>
+		<p>Implémentation embarquée par défaut: Lucène.</p>
+		<pre>
+		<code>
+//transaction omise
+IndexManager indexManager = graphDatastore.index();
+Index&lt;Node&gt; index = indexManager.forNodes("someEntity");
+Node node = graphDatastore.createNode();
+index.add(node, "key", "value");
+index.remove(node, "key", "value");
+index.delete();
+transaction.success();
+		</code>
+		</pre>
+		<p>Les index supportent également le pseudo-requêtage sur les valeurs indexées (ex: <code>index.query("key","*e*")</code>).</p>
 	</section>
 	
 	<section class="slide" id="presentation-de-springdata">
