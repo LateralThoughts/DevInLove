@@ -7,6 +7,10 @@ h1, .tagline { text-align:center;}
 #personal-info-block h3 { font-size:11pt; font-variant:small-caps;}
 .love { color:red;}
 input { height:auto !important;}
+.profiles  { list-style-type:none;}
+.profiles a { display:block;}
+.profiles img { width:260px; height:180px;}
+.profiles .profileOwner { display:block; text-align:center; font-size:12pt;}
 #misc-block { width: 80%;}
 #misc-block blockquote { margin: 15px;}
 #misc-block, #misc-block input { margin:0;}

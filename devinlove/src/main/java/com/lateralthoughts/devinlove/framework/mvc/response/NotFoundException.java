@@ -1,4 +1,4 @@
-package com.lateralthoughts.devinlove.response;
+package com.lateralthoughts.devinlove.framework.mvc.response;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 

@@ -21,8 +21,8 @@ import com.lateralthoughts.devinlove.domain.Person;
 import com.lateralthoughts.devinlove.domain.Status;
 import com.lateralthoughts.devinlove.domain.StatusRedaction;
 import com.lateralthoughts.devinlove.framework.conversion.StatusPropertyEditor;
+import com.lateralthoughts.devinlove.framework.mvc.response.NotFoundException;
 import com.lateralthoughts.devinlove.repository.PersonRepository;
-import com.lateralthoughts.devinlove.response.NotFoundException;
 import com.lateralthoughts.devinlove.service.StatusService;
 
 @Controller

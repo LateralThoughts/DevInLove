@@ -1,4 +1,4 @@
-package com.lateralthoughts.devinlove.framework;
+package com.lateralthoughts.devinlove.service;
 
 import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
 
@@ -6,8 +6,6 @@ import java.util.Date;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +19,10 @@ import com.lateralthoughts.devinlove.repository.CategoryRepository;
 import com.lateralthoughts.devinlove.repository.MascotRepository;
 import com.lateralthoughts.devinlove.repository.PersonRepository;
 import com.lateralthoughts.devinlove.repository.ToolRepository;
-import com.lateralthoughts.devinlove.service.StatusService;
 
 @Service
 @Transactional
-public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent> {
+public class GraphPopulator {
 
 	@Autowired
 	private MascotRepository mascotRepository;
@@ -38,12 +35,6 @@ public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent
 	@Autowired
 	private StatusService statusService;
 
-	@Override
-	public void onApplicationEvent(final ContextRefreshedEvent event) {
-		loadData();
-	}
-
-    @Transactional
 	public void loadData() {
 		lockABunchOfMascotsInCagesBwahaha();
 		createToolCategories();
@@ -115,9 +106,9 @@ public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent
 		return person;
 	}
 
-	private Tool findTool(final String toolname) {
-		return toolRepository.findByPropertyValue("name", toolname);
-	}
+	// private Tool findTool(final String toolname) {
+	// return toolRepository.findByPropertyValue("name", toolname);
+	// }
 
 	private Mascot findMascot(final String mascotName) {
 		return mascotRepository.findByPropertyValue("name", mascotName);

@@ -26,6 +26,7 @@ public class Person {
 	private String firstName;
 	private String lastName;
 	private String favoriteColor;
+	@Fetch
 	private Mascot mascot;
 	@RelatedTo(elementClass = Person.class, type = "IS_FRIEND_WITH", direction = BOTH)
 	private Set<Person> friends = new LinkedHashSet<Person>();
