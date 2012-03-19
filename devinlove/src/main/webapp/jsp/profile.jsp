@@ -37,11 +37,11 @@
 		
 			<form:form modelAttribute="statusCommand" cssClass="well">
 				<form:input path="message" cssClass="span7" placeholder="Say something interesting... for a change." />
-				<input type="submit" class="btn btn-primary" value="1,2,3... SHOUT!" />
+				<input type="submit" class="btn btn-primary btn-danger" value="1,2,3... SHOUT!" />
 			</form:form>
 		
 			<div class="span9">
-				<h3>Previously stated</h3>
+				<h3>That's what YOU said!</h3>
 				<c:choose>
 					<c:when test="${empty guy.statuses}">
 						<p>Well, well, well... nothing.</p>
@@ -55,6 +55,19 @@
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+				    <div class="pagination pagination-centered">
+					    <ul>
+					    	<c:if test="${hasPreviousPage}">
+						    	<li><a href="?p=<c:out value="${statusCurrentPage-1}" />">Prev</a></li>
+					    	</c:if>
+						    <li class="active">
+						    	<a href="?p=<c:out value="${statusCurrentPage}" />"><c:out value="${statusCurrentPage}" /></a>
+						    </li>
+					    	<c:if test="${hasNextPage}">
+						    	<li><a href="?p=<c:out value="${statusCurrentPage+1}" />">Next</a></li>
+					    	</c:if>
+					    </ul>
+				    </div>
 			</div>
 			
 		</div>

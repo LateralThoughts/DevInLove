@@ -14,7 +14,6 @@ import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
-import org.springframework.data.neo4j.template.Neo4jOperations;
 
 
 /**
@@ -103,8 +102,8 @@ public class Person {
 		return statuses;
 	}
 
-	public StatusRedaction addStatus(final Neo4jOperations template, final Status message, final Date creationDate) {
-		final StatusRedaction statusRedaction = template.createRelationshipBetween(this, message, StatusRedaction.class, "WRITES", false);
+	public StatusRedaction addStatus(final Status message, final Date creationDate) {
+		final StatusRedaction statusRedaction = new StatusRedaction(this, message, creationDate);
 		statuses.add(statusRedaction);
 		return statusRedaction;
     }

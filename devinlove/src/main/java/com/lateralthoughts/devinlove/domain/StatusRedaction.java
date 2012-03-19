@@ -103,5 +103,4 @@ public class StatusRedaction {
 	public Relationships getType() {
 		return type;
 	}
-
 }

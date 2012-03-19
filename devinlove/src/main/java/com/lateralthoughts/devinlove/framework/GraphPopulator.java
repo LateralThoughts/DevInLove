@@ -8,7 +8,6 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.data.neo4j.template.Neo4jOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +20,8 @@ import com.lateralthoughts.devinlove.domain.Tool;
 import com.lateralthoughts.devinlove.repository.CategoryRepository;
 import com.lateralthoughts.devinlove.repository.MascotRepository;
 import com.lateralthoughts.devinlove.repository.PersonRepository;
-import com.lateralthoughts.devinlove.repository.StatusRepository;
 import com.lateralthoughts.devinlove.repository.ToolRepository;
+import com.lateralthoughts.devinlove.service.StatusService;
 
 @Service
 @Transactional
@@ -36,10 +35,8 @@ public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent
 	private ToolRepository toolRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
-    @Autowired
-    private Neo4jOperations template;
-    @Autowired
-    private StatusRepository statusRepository;
+	@Autowired
+	private StatusService statusService;
 
 	@Override
 	public void onApplicationEvent(final ContextRefreshedEvent event) {
@@ -91,16 +88,12 @@ public class GraphPopulator implements ApplicationListener<ContextRefreshedEvent
 	}
 
 	private void loadABunchOfPeopleIntoTheMatrix() {
-        Person p = person("Florent", "Biville", "blue", "Tux", DEVELOPER, 42, "Hello world", "Java Standard Edition");
-		personRepository.save(p);
-        Status s = new Status("Associé chez Lateral-Thoughts");
-        statusRepository.save(s);
-        p.addStatus(template, s, new Date());
-        p = person("Olivier", "Girardot", "green", "Django Pony", DEVELOPER, 45, "A World Appart (Info)", "Python");
-        personRepository.save(p);
-        s = new Status("CTO APPARTINFO et Associé LT");
-        statusRepository.save(s);
-        p.addStatus(template, s, new Date());
+        Person florent = person("Florent", "Biville", "blue", "Tux", DEVELOPER, 42, "Hello world", "Java Standard Edition");
+		personRepository.save(florent);
+		statusService.saveNewStatus(new Status("Associé chez Lateral-Thoughts"), florent);
+		Person olivier = person("Olivier", "Girardot", "green", "Django Pony", DEVELOPER, 45, "A World Appart (Info)", "Python");
+		personRepository.save(olivier);
+		statusService.saveNewStatus(new Status("Fondateur et associé chez Lateral-Thoughts"), olivier);
 
     }
 

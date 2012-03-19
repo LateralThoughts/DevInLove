@@ -1,12 +1,12 @@
 package com.lateralthoughts.devinlove.controller;
 
-import static org.neo4j.helpers.collection.IteratorUtil.asCollection;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lateralthoughts.devinlove.domain.Person;
 import com.lateralthoughts.devinlove.domain.Status;
+import com.lateralthoughts.devinlove.domain.StatusRedaction;
 import com.lateralthoughts.devinlove.framework.conversion.StatusPropertyEditor;
 import com.lateralthoughts.devinlove.repository.PersonRepository;
 import com.lateralthoughts.devinlove.response.NotFoundException;
@@ -48,11 +49,17 @@ public class PersonController {
 	}
 
 	@RequestMapping(value = "/profile-{id}.html", method = GET)
-	public ModelAndView displayProfile(@PathVariable("id") final long island /* ahah */) {
+	public ModelAndView displayProfile(@PathVariable("id") final long island /* ahah */, @RequestParam(value = "p", defaultValue = "1") int page) {
+		if (page < 1)
+			page = 1;
 		ModelAndView modelAndView = new ModelAndView("profile");
 		Person person = retrievePerson(island);
 		modelAndView.addObject("guy", person);
-		modelAndView.addObject("statuses", asCollection(person.getStatuses()));
+		Page<StatusRedaction> sortedStatuses = personRepository.findSortedStatuses(person.getId(), new PageRequest(page - 1, 10));
+		modelAndView.addObject("statuses", sortedStatuses.getContent());
+		modelAndView.addObject("statusCurrentPage", sortedStatuses.getNumber() + 1);
+		modelAndView.addObject("hasPreviousPage", sortedStatuses.hasPreviousPage());
+		modelAndView.addObject("hasNextPage", sortedStatuses.hasNextPage());
 		modelAndView.addObject("statusCommand", new Status(""));
 		return modelAndView;
 	}
