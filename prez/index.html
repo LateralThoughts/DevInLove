@@ -20,14 +20,14 @@
 	<link rel="stylesheet" href="extensions/navigation/deck.navigation.css">
 	<link rel="stylesheet" href="extensions/status/deck.status.css">
 	<link rel="stylesheet" href="extensions/hash/deck.hash.css">
+	<link rel="stylesheet" href="extensions/codemirror/deck.codemirror.css">
 	
 	<!-- Style theme. More available in /themes/style/ or create your own. -->
 	<link rel="stylesheet" href="css/web-2.0.css">
 	
 	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
 	<link rel="stylesheet" href="css/transition/horizontal-slide.css">
-	
-	<script src="js/modernizr.custom.js"></script>
+	<link rel="stylesheet" href="extensions/codemirror/themes/default.css"/>
 </head>
 <body class="deck-container">
 
@@ -246,8 +246,7 @@
 	
 	<section class="slide" id="neo4j-code-bases">
 		<h2>Concepts I &middot; in da code</h2>
-		<pre>
-			<code>
+		  	<textarea type="text/x-java" class="code" mode="text/x-java" style="display: none;">// codemirror demo party!
 private GraphDatabaseService graphDatastore = new EmbeddedGraphDatabase(PATH);
   
 public void demonstration() {
@@ -266,15 +265,13 @@ public void demonstration() {
 		transaction.finish();
 	}
 }
-			</code>
-		</pre>
+        </textarea>
 	</section>
 	
 	<section class="slide" id="concepts-suite">
 		<h2>Concepts II &middot; traversée de graphe</h2>
 		<p>Quizz: combien de noeuds sont retournés ?</p>
-		<pre>
-			<code>
+		<textarea class="code" mode="text/x-java" style="display: none;">
 Traverser traverser = iAmANode.traverse(BREADTH_FIRST, DEPTH_ONE, 
 	new ReturnableEvaluator() {
 		@Override
@@ -288,16 +285,14 @@ ROMANTIC, BOTH);
 for (Node node : traverser.getAllNodes()) {
 	System.out.println(node.getProperty("name"));
 }
-			</code>
-		</pre>
+		</textarea>
 		<p>Possibilités d'utiliser des langages comme Cypher ou Gremlin...</p>
 	</section>
 	
 	<section class="slide" id="concepts-end">
 		<h2>Concepts III &middot; Index</h2>
 		<p>Implémentation embarquée par défaut: Lucène.</p>
-		<pre>
-		<code>
+		<textarea class="code" mode="text/x-java" style="display: none;">
 //transaction omise
 IndexManager indexManager = graphDatastore.index();
 Index&lt;Node&gt; index = indexManager.forNodes("someEntity");
@@ -306,8 +301,7 @@ index.add(node, "key", "value");
 index.remove(node, "key", "value");
 index.delete();
 transaction.success();
-		</code>
-		</pre>
+		</textarea>
 		<p>Les index supportent également le pseudo-requêtage sur les valeurs indexées (ex: <code>index.query("key","*e*")</code>).</p>
 	</section>
 	
@@ -338,6 +332,7 @@ transaction.success();
 				<li>Voire même carrément sexy : <img style="float:right; width:500px; height:auto;" src="img/roadrunner_supercomputer.jpg"/></li>
 			</ul>
 		</p>
+		<p></p>
 	</section>
 
 	<section class="slide" id="deploy-options">
@@ -356,7 +351,7 @@ transaction.success();
 			</li>
 		</ul>
 	</section>
-	
+
 	<section class="slide" id="deploiement">
 		<h1>Conclusion</h1>
 	</section>
@@ -385,7 +380,7 @@ transaction.success();
 
 
 	<!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
-	<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
 	<script>
 		window.jQuery || document.write('<script src="js/jquery-1.7.min.js"><\/script>')
 	</script>
@@ -397,6 +392,22 @@ transaction.success();
 	<script src="extensions/goto/deck.goto.js"></script>
 	<script src="extensions/status/deck.status.js"></script>
 	<script src="extensions/navigation/deck.navigation.js"></script>
+		<script src="extensions/codemirror/codemirror.js"></script>
+
+	<!-- Syntax highlighting Modes -->
+	<!-- javascript -->
+	<script src="extensions/codemirror/mode/javascript/javascript.js"></script>
+
+	<!-- html mode (note html mode requires xml, css and javascript) -->
+	<script src="extensions/codemirror/mode/clike/clike.js"></script>
+	<script src="extensions/codemirror/mode/xml/xml.js"></script>
+	<script src="extensions/codemirror/mode/css/css.js"></script>
+	<script src="extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
+	<!-- Plugin code -->
+	<script src="extensions/codemirror/deck.codemirror.js"></script>
+	<script src="js/modernizr.custom.js"></script>
+
 
 	<!-- Initialize the deck -->
 	<script>
