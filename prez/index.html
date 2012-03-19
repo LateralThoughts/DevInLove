@@ -44,7 +44,7 @@
 				<h3>Olivier Girardot</h3>
 				<ul>
 					<li>Associé/fondateur de <a href="http://www.lateral-thoughts.com/">Lateral Thoughts</a></li>
-					<li>Fondateur d'AppartInfo.com</li>
+					<li>Fondateur d'<a href="http://www.appartinfo.com/">APPARTINFO.com</a></li>
 					<li><a href="https://twitter.com/#!/ogirardot">@ogirardot</a></li>
 				</ul>
 			</li>
@@ -95,26 +95,26 @@
 	<section class="slide" id="nosql-def">
 		<h2>NoSQL</h2>
 		<p>NoSQL = <strong>Not Only SQL</strong></p>
-		<ol>
+		<ul>
 			<li>Le terme date 1998 et popularisé en 2009</li>
 			<li>Base de données très différentes</li>
 			<li>Eloignées du modèle relational des SGBDR (Oracle, PostgreSQL etc.)</li>
 			<li>Souvent associée à des modèles scalables, mais pas que.</li>
-		</ol>
+		</ul>
 		<p>basé sur un bilan simple :
-			<ol>
+			<ul>
 				<li>ACID et SQL coutent cher</li>
 				<li>Le seul vrai moyen efficace de rendre scalable une BDD relationnelle, c'est le sharding !</li>
 				<li><strong>Le SHARDING c dur !</strong></li>
 				<li>Le théorème CAP de Brewer est inévitable</li>
-			</ol>
+			</ul>
 		</p>
 		<p><strong>On peut faire mieux !</strong></p> 
 	</section>
 
 	<section class="slide" id="nosql-type">
 		<h2>Les différents types</h2>
-		<ol>
+		<ul style="float:left">
 			<li>
 				Key-Value Store :
 				<ul>
@@ -129,6 +129,8 @@
 					<li>MongoDB</li>
 				</ul>
 			</li>
+		</ul>
+		<ul style="float:right">
 			<li>Column oriented : 
 				<ul>
 					<li>Cassandra</li>
@@ -141,7 +143,9 @@
 					<li>et Kyoto Cabinet</li>
 				</ul>
 			</li>
-		</ol>
+		</ul>
+		<div style="clear:both"/>
+		<p>Bien sûr il n'y a ici que les principaux acteurs.</p>
 	</section>
 	
 	<section class="slide" id="nosql-enfin">
@@ -191,9 +195,14 @@
 	
 	<section class="slide" id="plan">
 		<h2>BDD orientée graphe: pourquoi faire ?</h2>
-		<ul>
+		<ul style="float:left">
 			<li>Données fortement inter-connectées</li>
+			<li>Les Graphes représentent bien un modèle Objet</li>
+			<li>Est plus facilement scalable qu'un SGBDR, Pas de Jointure coûteuses</li>
+			<li>Modèle rempli d'algorithmes efficaces <br/>et bien connus en Recherche Opérationnelle</li>
+			<li>Flexible et souvent Schema-Less</li>
 		</ul>
+		<img style="float:right" src="img/graphdb-GVE.svg"/>
 	</section>
 	
 	<section class="slide" id="presentation-de-springdata">
@@ -210,6 +219,11 @@
 	
 	<section class="slide" id="deploiement">
 		<h1>Déploiement</h1>
+	</section>
+
+	<section class="slide" id="deploy">
+		<h2>Et si on en faisait quelque chose ?</h2>
+
 	</section>
 	
 	<section class="slide" id="deploiement">
