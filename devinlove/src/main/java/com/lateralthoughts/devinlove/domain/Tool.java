@@ -27,6 +27,7 @@ import org.springframework.data.neo4j.annotation.RelatedToVia;
 public class Tool {
 	@GraphId
 	private Long id;
+	@Fetch
 	@Indexed
 	private String name;
 	private String version;

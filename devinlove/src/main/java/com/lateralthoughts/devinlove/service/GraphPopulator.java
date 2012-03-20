@@ -5,6 +5,9 @@ import static com.lateralthoughts.devinlove.domain.ToolAffinity.HATE;
 import static com.lateralthoughts.devinlove.domain.ToolAffinity.LOVE;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,19 +95,30 @@ public class GraphPopulator {
 	}
 
 	private void loadABunchOfPeopleIntoTheMatrix() {
-		Person florent = person("Florent", "Biville", "blue", tux, DEVELOPER, 42, "Hello world", LOVE, "Java Standard Edition");
-		florent.addTool(findTool("Perforce"), HATE);
-		florent.addTool(findTool("Git"), LOVE);
-		florent.addTool(findTool("Eclipse"), LOVE);
-		personRepository.save(florent);
+		Person florent = person("Florent", "Biville", "blue", tux, DEVELOPER, 42, "Hello world", tastesOfFlorent());
 		statusService.saveNewStatus(new Status("Associé chez Lateral-Thoughts"), florent);
-		Person olivier = person("Olivier", "Girardot", "green", django, DEVELOPER, 45, "A World Appart (Info)", LOVE, "Python");
-		olivier.addTool(findTool("Git"), LOVE);
-		olivier.addTool(findTool("IntelliJ IDEA"), LOVE);
+		Person olivier = person("Olivier", "Girardot", "green", django, DEVELOPER, 45, "A World Appart (Info)", tasteOfOlivier());
 		personRepository.save(olivier);
 		statusService.saveNewStatus(new Status("Fondateur et associé chez Lateral-Thoughts"), olivier);
 
     }
+
+	private HashMap<String, ToolAffinity> tasteOfOlivier() {
+		HashMap<String, ToolAffinity> olivierAffinity = new HashMap<String, ToolAffinity>();
+		olivierAffinity.put("Python", LOVE);
+		olivierAffinity.put("Git", LOVE);
+		olivierAffinity.put("IntelliJ IDEA", LOVE);
+		return olivierAffinity;
+	}
+
+	private HashMap<String, ToolAffinity> tastesOfFlorent() {
+		HashMap<String, ToolAffinity> floAffinity = new HashMap<String, ToolAffinity>();
+		floAffinity.put("Java Standard Edition", LOVE);
+		floAffinity.put("Perforce", HATE);
+		floAffinity.put("Git", LOVE);
+		floAffinity.put("Eclipse", LOVE);
+		return floAffinity;
+	}
 
 	private Category category(final String name) {
 		Category category = new Category();
@@ -112,7 +126,7 @@ public class GraphPopulator {
 		return category;
 	}
 
-	private Person person(final String firstName, final String lastName, final String color, final Mascot mascot, final ProfoundIdentity profoundIdentity, final int shoeSize, final String firstStatus, final ToolAffinity affinity, final String toolName) {
+	private Person person(final String firstName, final String lastName, final String color, final Mascot mascot, final ProfoundIdentity profoundIdentity, final int shoeSize, final String firstStatus, final Map<String, ToolAffinity> toolAffinities) {
 		Person person = new Person();
 		person.setFavoriteColor(color);
 		person.setFirstName(firstName);
@@ -120,7 +134,9 @@ public class GraphPopulator {
 		person.setMascot(mascot);
 		person.setProfoundIdentity(profoundIdentity);
 		person.setShoeSize(shoeSize);
-		person.addTool(findTool(toolName), affinity);
+		for (Entry<String, ToolAffinity> toolAffinity : toolAffinities.entrySet()) {
+			person.addTool(findTool(toolAffinity.getKey()), toolAffinity.getValue());
+		}
 		return person;
 	}
 

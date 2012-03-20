@@ -12,10 +12,4 @@ public class HomeController {
     public String index(final Model model) throws Exception {
         return "index";
     }
-
-    @RequestMapping(value = "/search.html")
-    public String search(final Model model) throws Exception {
-		// personRepository.findAllByQuery();
-        return "index";
-    }
 }

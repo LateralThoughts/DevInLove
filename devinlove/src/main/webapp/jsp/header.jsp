@@ -10,8 +10,8 @@
 				<li class="active"><a href="<c:url value="/index.html" />" class="brand" style=""><img alt="" src="<c:url value="/resources/img/logo.gif" />" id="logo"/> DevIn<span class="love">Love</span></a></li>
 				<li><a href="<c:url value="/profiles.html" />">People</a></li>
 			</ul>
-			<form class="navbar-search pull-left">
-				<input type="text" class="search-query" placeholder="Search...">
+			<form class="navbar-search pull-left" method="get" action="<c:url value="/search.html" />">
+				<input type="text" class="search-query" name="search" placeholder="Search...">
 			</form>
 		</div>
 	</div>

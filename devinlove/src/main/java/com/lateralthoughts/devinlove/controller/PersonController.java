@@ -1,5 +1,6 @@
 package com.lateralthoughts.devinlove.controller;
 
+import static org.neo4j.helpers.collection.IteratorUtil.asCollection;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -57,13 +58,13 @@ public class PersonController {
 		modelAndView.addObject("guy", person);
 		modelAndView.addObject("statusCommand", new Status(""));
 		retrieveStatuses(statusPage, modelAndView, person);
-		modelAndView.addObject("tools", personRepository.findTools(person.getId()));
+		modelAndView.addObject("tools", asCollection(personRepository.findTools(person.getId())));
 		return modelAndView;
 	}
 
 
 	private void retrieveStatuses(final int page, final ModelAndView modelAndView, final Person person) {
-		Page<StatusRedaction> sortedStatuses = personRepository.findSortedStatuses(person.getId(), new PageRequest(page - 1, 10));
+		Page<StatusRedaction> sortedStatuses = personRepository.findSortedStatuses(person.getId(), new PageRequest(page - 1, 5));
 		modelAndView.addObject("statuses", sortedStatuses.getContent());
 		modelAndView.addObject("statusCurrentPage", sortedStatuses.getNumber() + 1);
 		modelAndView.addObject("hasPreviousPage", sortedStatuses.hasPreviousPage());
@@ -86,11 +87,6 @@ public class PersonController {
 		if (person == null) {
 			throw new NotFoundException();
 		}
-		/*
-		 * for (StatusRedaction status : person.getStatuses()) { String
-		 * statusMessage = status.getStatusMessage();
-		 * System.out.println(statusMessage); }
-		 */
 		return person;
 	}
 }
