@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.lateralthoughts.devinlove.domain.Person;
 import com.lateralthoughts.devinlove.domain.StatusRedaction;
@@ -27,6 +28,6 @@ public interface PersonRepository extends GraphRepository<Person> {
 	 * QUERY MEANING: get all outgoing edges of type WORKS_WITH (a.k.a.
 	 * ToolUsage) of the specified vertex
 	 */
-	@Query(type = Gremlin, value = "g.v({0}).outE.filter(it.type=\"WORKS_WITH\")")
-	Set<ToolUsage> findTools(Long personId);
+	@Query(type = Gremlin, value = "g.v(id).outE('WORKS_WITH')")
+	Set<ToolUsage> findTools(@Param("id") Long personId);
 }

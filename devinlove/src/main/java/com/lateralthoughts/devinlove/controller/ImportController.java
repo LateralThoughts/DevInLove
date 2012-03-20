@@ -5,7 +5,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lateralthoughts.devinlove.service.GraphPopulator;
 
@@ -16,9 +15,8 @@ public class ImportController {
 	private GraphPopulator populator;
 	
 	@RequestMapping(value = "/import.html", method = GET)
-	@ResponseBody
 	public String importData() {
 		populator.loadData();
-		return "done ;)";
+		return "redirect:/profiles.html";
 	}
 }

@@ -57,8 +57,7 @@ public class PersonController {
 		modelAndView.addObject("guy", person);
 		modelAndView.addObject("statusCommand", new Status(""));
 		retrieveStatuses(statusPage, modelAndView, person);
-		// modelAndView.addObject("tools",
-		// personRepository.findTools(person.getId()));
+		modelAndView.addObject("tools", personRepository.findTools(person.getId()));
 		return modelAndView;
 	}
 

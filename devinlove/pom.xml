@@ -14,11 +14,17 @@
 			<name>Spring Maven MILESTONE Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
 		</repository>
+		<repository>
+			<id>neo4j</id>
+			<name>Neo4J Public Repository</name>
+			<url>http://m2.neo4j.org/content/repositories/public</url>
+		</repository>
 	</repositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-data-neo4j.version>2.0.0.RELEASE</spring-data-neo4j.version>
 		<neo4j-version>1.6</neo4j-version>
+		<gremlin.version>1.4</gremlin.version>
 		<eclipse-lifecycle-mapping.version>1.0.0</eclipse-lifecycle-mapping.version>
 		<resources-plugin.version>2.4.3</resources-plugin.version>
 		<junit.version>4.10</junit.version>
@@ -62,6 +68,33 @@
 			<artifactId>neo4j-cypher</artifactId>
 			<version>${neo4j-version}</version>
 		</dependency>
+
+
+		<!-- Needed for Gremlin requests -->
+		<dependency>
+			<groupId>com.tinkerpop.blueprints</groupId>
+			<artifactId>blueprints-core</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.tinkerpop.blueprints</groupId>
+			<artifactId>blueprints-neo4j-graph</artifactId>
+			<version>1.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.neo4j</groupId>
+					<artifactId>neo4j</artifactId>
+				</exclusion>
+			</exclusions>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.tinkerpop.gremlin</groupId>
+			<artifactId>gremlin-groovy</artifactId>
+			<version>${gremlin.version}</version>
+			<optional>true</optional>
+		</dependency>
+
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
