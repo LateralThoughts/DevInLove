@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	
-	<title>SpringData / Neo4j en action</title>
+	<title>Neo4J dans la mouvance NOSQL</title>
 	
 	<meta name="author" content="Florent Biville">
 	<meta name="author" content="Olivier Girardot">
@@ -33,7 +33,7 @@
 
 
 	<section class="slide" id="begin">
-		<h1>Introduction à SpringData / Neo4j</h1>
+		<h1>Neo4J dans la mouvance NOSQL</h1>
 	</section>
 
 
@@ -52,7 +52,7 @@
 				<h3>Florent Biville</h3>
 				<ul>
 					<li><h4>Développeur à <a href="http://www.lateral-thoughts.com/">Lateral Thoughts</a></h4></li>
-					<li><h4>Finaliste malheureux de CodeStory ;(</h4></li>
+					<li><h4>Diplômé INSA 2009</h4></li>
 					<li><h4><a href="https://twitter.com/#!/fbiville">@fbiville</a></h4></li>
 				</ul>
 			</li>
@@ -63,22 +63,16 @@
 		<h2>Plan</h2>
 		<ol>
 			<li>
-				<h3>La mouvance NOSQL</h3>
+				<h3>NOSQL ?</h3>
 			</li>
 			<li>
-				<h3>Utilisation de Neo4J</h3>
+				<h3>Les graphes dans tout ça ?</h3>
 			</li>
 			<li>
-				<h3>Présentation de SpringData</h3>
-			</li>
-			<li>
-				<h3>DevInLove</h3>
+				<h3>Neo4J</h3>
 			</li>
 			<li>
 				<h3>Utilisation sur l'existant</h3>
-			</li>
-			<li>
-				<h3>Déploiement</h3>
 			</li>
 		</ol>
 	</section>
@@ -98,26 +92,87 @@
 	</section>
 
 	<section class="slide" id="nosql-def">
-		<h2>NOSQL</h2>
-		<h3>NOSQL = <strong>Not Only SQL</strong></h3>
+		<h2>NOSQL = <strong>Not Only SQL</strong></h2>
 		<ul>
 			<li>Le terme date de 1998 et est popularisé en 2009</li>
 			<li>Il regroupe des bases de données très différentes</li>
 			<li>Éloigné du modèle relationnel des SGBDR (Oracle, PostgreSQL etc.)</li>
-			<li>Souvent associé à des modèles scalables, mais pas que.</li>
+			<li>Souvent associé à des modèles échelonnables, mais pas que.</li>
 		</ul>
-		<h3>Basé sur un bilan simple</h3>
+	</section>
+
+	<section class="slide" id="begin">
+		<h1>&lt;Flashback about="le modèle relationnel"&gt;</h1>
+	</section>
+
+	<section class="slide" id="bases-relationnelles">
+		<h2>L'hégémonie relationnelle</h2>
+		<p>Le modèle relationnel a éte défini par <a href="http://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf">Edgar Codd</a> il y a 40 ans ...</p>
+		<img style="display:block;" src="img/relational.png" />
+		<img style="display:block; border:2px solid black;" src="img/relational_details.png" />
+		<p>... et il domine toujours.</p>
+	</section>
+
+	<section class="slide" id="relationnel-gagne">
+		<h2>L'hégémonie relationnelle</h2>
+		<p>... et il a ses limites :</p>
 		<ul>
 			<li>ACID et SQL coûtent cher</li>
 			<li>Le seul vrai moyen efficace de rendre échelonnable une BDD relationnelle, c'est le sharding !</li>
 			<li><strong>Le SHARDING c'est dur !</strong> et ça dépend beaucoup du métier...</li>
 			<li>Le théorème CAP de Brewer est inévitable</li>
 		</ul>
-		<p><strong>On peut faire mieux !</strong></p> 
+	</section>
+
+	<section class="slide" id="relationnel-rappels">
+		<h2>ACID ?</h2>
+		<dl>
+			<dt><strong>A</strong>tomicity</dt>
+			<dd>Chaque transaction est vue comme une opération unique. Toutes ou aucune des modifications sont persistées (commit/rollback), aucun état intermédiaire n'est permis.</dd>
+			<dt><strong>C</strong>onsistency</dt>
+			<dd>Chaque état atteint par le système de persistance est stable et valide.</dd>
+			<dt><strong>I</strong>solation</dt>
+			<dd>Chaque transaction a son propre état, indépendant des autres transactions en cours d'exécution.</dd>
+			<dt><strong>D</strong>urability</dt>
+			<dd>Tout résultat committé doit persister en permanence même après crash.</dd>
+		</dl>
+	</section>
+
+	<section class="slide" id="relationnel-rappels">
+		<h2>Sharding ?</h2>
+		<p>Partitionnement horizontal des données, i.e. par lignes plutôt que par colonne.</p>
+		<p>TODO: Schéma avant/après sharding</p>
+	</section>
+
+	<section class="slide" id="relationnel-rappels">
+		<h2>Théorème de CAP ?</h2>
+		<p>TODO: Schéma lisible (noir sur blanc)</p>
+		<img style="height:600px; width:auto;" src="img/visual_nosql.png"/>
+	</section>
+
+	<section class="slide" id="relationnel-gagne">
+		<h2>L'hégémonie relationnelle (on reprend)</h2>
+		<p>... et il a ses limites :</p>
+		<ul>
+			<li>ACID et SQL coûtent cher</li>
+			<li>Le seul vrai moyen efficace de rendre échelonnable une BDD relationnelle, c'est le sharding !</li>
+			<li><strong>Le SHARDING c'est dur !</strong> et ça dépend beaucoup du métier...</li>
+			<li>Le théorème CAP de Brewer est inévitable</li>
+		</ul>
+	</section>
+
+	<section class="slide" id="conclusion-relationnel">
+		<h2>Conclusion ?</h2>
+		<p>On a beaucoup progressé pour monter en charge avec nos applications, beaucoup moins avec les systèmes persistant les données qu'elles manipulent !</p> 
+		<p class="small">Indice : on peut faire mieux ;)</p>
+	</section>
+
+	<section class="slide" id="back-to-the-future">
+		<h1>&lt;/Flashback&gt;</h1>
 	</section>
 
 	<section class="slide" id="nosql-type">
-		<h2>Les différents types</h2>
+		<h2>La famille NOSQL</h2>
 		<ul style="float:left">
 			<li>
 				Key-Value Store :
@@ -141,7 +196,7 @@
 					<li>RIAK</li>
 				</ul>
 			</li>
-			<li> les versatiles :
+			<li>les versatiles :
 				<ul>
 					<li>Tokyo Cabinet</li>
 					<li>et Kyoto Cabinet</li>
@@ -153,9 +208,8 @@
 	</section>
 	
 	<section class="slide" id="nosql-enfin">
-		<h2>Et enfin ...</h2>
-		Les bases de données Graphes :
-		<div style="clear:both">&nbsp;</div>
+		<h2>Last but not least...</h2>
+		<p>Les bases de données Graphes :</p>
 		<ul style="float:left">
 			<li>AllegroGraph</li>
 			<li>Bigdata</li>
@@ -182,44 +236,18 @@
 		</ul>
 	</section>
 
-	<section class="slide" id="nosql-cap">
-		<h2>Et par rapport au théorème CAP ?</h2>
-		<img style="height:600px; width:auto;" src="img/visual_nosql.png"/>
-	</section>
-
 	<section class="slide" id="nosql-avenir">
-		<h2>Peut-être que l'avenir c'est ça ?</h2>
+		<h2>Et si on s'orientait vers ça ?</h2>
 		<img src="img/polyglot_bdd.png"/>
 	</section>
 
-	<section class="slide" id="presentation-de-neo4j">
-		<h1>Présentation de Neo4J</h1>
+	<section class="slide" id="les-graphes">
+		<h1>Graphe, vous avez dit graphe ?</h1>
 	</section>
-	
-	<section class="slide" id="mais-pourquoi-faire">
-		<h2>Pourquoi Neo4J ?</h2>
-		<ul>
-			<li><h3>Base de données écrite en Java</h3></li>
-			<li><h3>Projet(s) <a href="https://github.com/neo4j/">open-source</a> (licence <a href="http://en.wikipedia.org/wiki/Affero_General_Public_License">AGPL</a>)</h3></li>
-			<li><h3>Supportée commercialement par <a href="http://neotechnology.com/">Neo Technology</a></h3></li>
-			<li><h3>Rapprochement récent de SpringSource</h3></li>
-		</ul>
-		<h2>Roadmap</h2>
-		<ul>
-			<li><h3>Version stable: 1.6</h3></li>
-			<li><h3>1.7 prévue fin Mars 2012</h3></li>
-		</ul>
-	</section>
-	
-	<section class="slide" id="mais-pourquoi-faire-bis">
-		<h2>BDD orientée graphe ?</h2>
-		<ul>
-			<li><h3>Données fortement inter-connectées</h3></li>
-			<li><h3>Les Graphes représentent bien un modèle Objet</h3></li>
-			<li><h3>Est plus facilement scalable qu'un SGBDR, pas de jointures coûteuses</h3></li>
-			<li><h3>Modèle rempli d'algorithmes efficaces <br/>et bien connus en Recherche Opérationnelle</h3></li>
-			<li><h3>Flexible et souvent Schema-Less</h3></li>
-		</ul>
+
+	<section class="slide" id="nosql-avenir">
+		<h2>Et si on s'orientait vers ça ?</h2>
+		<img src="img/polyglot_bdd.png"/>
 	</section>
 	
 	<section class="slide" id="concepts-basics">
@@ -242,9 +270,39 @@
 			</li>
 		</ul>
 	</section>
+
+	<section class="slide" id="presentation-de-neo4j">
+		<h1>Présentation de Neo4J</h1>
+	</section>
+	
+	<section class="slide" id="mais-pourquoi-faire">
+		<h2>Pourquoi Neo4J ?</h2>
+		<ul>
+			<li><h3>Base de données écrite en Java</h3></li>
+			<li><h3>Projet(s) <a href="https://github.com/neo4j/">open-source</a> (licence <a href="http://en.wikipedia.org/wiki/Affero_General_Public_License">AGPL</a>)</h3></li>
+			<li><h3>Supportée commercialement par <a href="http://neotechnology.com/">Neo Technology</a></h3></li>
+			<li><h3>Rapprochement récent de SpringSource</h3></li>
+		</ul>
+		<h2>Roadmap</h2>
+		<ul>
+			<li><h3>Version stable: 1.7.2</h3></li>
+			<li><h3>1.8 dans les cartons</h3></li>
+		</ul>
+	</section>
+	
+	<section class="slide" id="mais-pourquoi-faire-bis">
+		<h2>BDD orientée graphe ?</h2>
+		<ul>
+			<li><h3>Données fortement inter-connectées</h3></li>
+			<li><h3>Les Graphes représentent bien un modèle Objet</h3></li>
+			<li><h3>Est plus facilement scalable qu'un SGBDR, pas de jointures coûteuses</h3></li>
+			<li><h3>Modèle rempli d'algorithmes efficaces <br/>et bien connus en Recherche Opérationnelle</h3></li>
+			<li><h3>Flexible et souvent Schema-Less</h3></li>
+		</ul>
+	</section>
 	
 	<section class="slide" id="neo4j-code-bases">
-		<h2>Concepts I &middot; in da code</h2>
+		<h2>Exemple I &middot; création d'un graphe</h2>
 	  	<textarea type="text/x-java" class="code" mode="text/x-java" style="display: none;">
 private GraphDatabaseService graphDatastore = new EmbeddedGraphDatabase(PATH);
   
@@ -268,7 +326,7 @@ public void demonstration() {
 	</section>
 	
 	<section class="slide" id="concepts-suite">
-		<h2>Concepts II &middot; traversée de graphe</h2>
+		<h2>Exemple II &middot; traversée de graphe</h2>
 		<p>Quizz: combien de noeuds sont retournés ?</p>
 		<textarea class="code" mode="text/x-java" style="display: none;">
 Traverser traverser = iAmANode.traverse(BREADTH_FIRST, DEPTH_ONE, new ReturnableEvaluator() {
@@ -287,7 +345,7 @@ for (Node node : traverser.getAllNodes()) {
 	</section>
 	
 	<section class="slide" id="concepts-end">
-		<h2>Concepts III &middot; index</h2>
+		<h2>Exemple III &middot; index</h2>
 		<p>Implémentation embarquée par défaut: Lucène.</p>
 		<textarea class="code" mode="text/x-java" style="display: none;">
 //transaction omise
@@ -471,40 +529,6 @@ public class UserAccount {
 }
 		</textarea>
 	</section>
-	
-	<section class="slide" id="deploiement">
-		<h1>Déploiement</h1>
-	</section>
-
-	<section class="slide" id="deploy">
-		<h2>Et si on en faisait quelque chose ?</h2>
-		<p>Donc plusieurs questions :
-			<ul>
-				<li>Est ce qu'il existe des plateformes de déploiements ?</li>
-				<li>Fiables ?</li>
-				<li>Pas cher ?</li>
-				<li>Simples ?</li>
-				<li>Voire même carrément sexy : <img style="float:right; width:500px; height:auto;" src="img/roadrunner_supercomputer.jpg"/></li>
-			</ul>
-		</p>
-	</section>
-
-	<section class="slide" id="deploy-options">
-		<h2>Plusieurs options existent</h2>
-		<ul>
-			<li>Heroku - avec Spring et Neo4j depuis 01/2012</li>
-			<li>AmazonEC2 - des images EC2 existent depuis 2011</li>
-			<li>CloudFoundry : <a href="https://github.com/cloudfoundry/vcap/pull/46">https://github.com/cloudfoundry/vcap/pull/46</a></li>
-			<li>Sinon tout les VPS suffisent avec un bon Cookbook Chef: <a href="https://github.com/michaelklishin/neo4j-server-chef-cookbook">https://github.com/michaelklishin/neo4j-server-chef-cookbook</a>. Quelques exemples :
-				<ul>
-					<li><a href="http://www.6sync.com">6sync</a></li>
-					<li><a href="http://www.linode.com/">Linode</a></li>
-					<li><a href="http://www.gandi.net">Gandi</a></li>
-					<li><a href="http://www.ovh.com">OVH</a></li>
-				</ul>
-			</li>
-		</ul>
-	</section>
 
 	<section class="slide" id="conclusion">
 		<h1>Conclusion</h1>
@@ -512,15 +536,6 @@ public class UserAccount {
 
 	<section class="slide" id="questions">
 		<h1>Questions ?</h1>
-	</section>
-
-	<section class="slide" id="onemorething" style="margin-left:150px; margin-top:200px;">
-		<h2>See you à Devoxx France ;)</h2>
-		<ul>
-			<li><h3><a href="http://devoxx.fr/display/FR12/1%2C+2%2C+3+Innovez%2C+partez+!">&ldquo;1, 2, 3 Innovez, partez !&rdquo;</a></h3></li>
-			<li><h3><a href="http://devoxx.fr/pages/viewpage.action?pageId=6128514">&ldquo;(R)évolutionnez vos bases de données avec Liquibase !&rdquo;</a></h3></li>
-			<li><h3><a href="http://devoxx.fr/display/FR12/Localize+your+apps">&ldquo;Localize your apps&rdquo;</a></h3></li>
-		</ul>
 	</section>
 
 
@@ -559,7 +574,7 @@ public class UserAccount {
 	<script src="extensions/goto/deck.goto.js"></script>
 	<script src="extensions/status/deck.status.js"></script>
 	<script src="extensions/navigation/deck.navigation.js"></script>
-		<script src="extensions/codemirror/codemirror.js"></script>
+	<script src="extensions/codemirror/codemirror.js"></script>
 
 	<!-- Syntax highlighting Modes -->
 	<!-- javascript -->
