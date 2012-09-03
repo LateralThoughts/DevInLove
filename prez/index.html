@@ -245,9 +245,59 @@
 		<h1>Graphe, vous avez dit graphe ?</h1>
 	</section>
 
-	<section class="slide" id="nosql-avenir">
-		<h2>Et si on s'orientait vers ça ?</h2>
-		<img src="img/polyglot_bdd.png"/>
+	<section class="slide" id="graphe-minimal">
+		<h2>Le graphe le plus simple du monde</h2>
+		<img src="img/simplest_graph.png"/>
+	</section>
+
+	<section class="slide" id="graphe-avec-relations">
+		<h2>Un graphe un peu plus intéressant</h2>
+		<img src="img/graph_relationships.png"/>
+	</section>
+
+	<section class="slide" id="representations-de-graphe">
+		<h2>Autres modes de représentations</h2>
+		<p>TODO: même graphe, avec liste d'adjacence & matrice d'adjacence
+		<img src="img/graph_representations.png"/>
+	</section>
+
+	<section class="slide" id="representations-de-graphe">
+		<h2>Recherche sur graphe (I/III)</h2>
+		<h3>Breadth-first search</h3>
+		<img style="display:block" src="img/breadth_first_search.gif"/>
+		<p>Propriétés intéressantes:</p>		
+		<ul>
+			<li>Complexité: O(n) où n=somme du nombre de <em>vertices</em> et d'<em>egdes</em></li>
+			<li>Tous les plus courts chemins depuis le <em>vertex</em> racine sont découverts</li>
+		</ul>
+	</section>
+
+	<section class="slide" id="representations-de-graphe">
+		<h2>Recherche sur graphe (II/III)</h2>
+		<h3>Depth-first search</h3>
+		<img style="display:block" src="img/depth_first_search.gif"/>
+		<p>Propriétés intéressantes:</p>		
+		<ul>
+			<li>Classification des <em>edges<em>:
+				<ul>
+					<li>tree edges</li>
+					<li>back edges</li>
+					<li>forward edges</li>
+					<li>cross edges</li>
+				</ul>
+			</li>
+			<li>Tri topologique possible</li>
+		</ul>
+	</section>
+
+	<section class="slide" id="representations-de-graphe">
+		<h2>Recherche sur graphe (III/III)</h2>
+		<h3>Tri topologique avec une depth-first search <span class="small">(très fortement inspiré de la figure 22.7 de "Introduction to Algorithms", chapitre 22.4)</span></h3>
+		<p>Avant:</p>
+		<img style="display:block" src="img/topological_sort_before.png"/>
+		<p>Après:</p>
+		<img style="display:block" src="img/topological_sort_after.png"/>
+		<p>Note: cela ne fonctionne qu'avec des graphes acycliques orientés.</p>
 	</section>
 	
 	<section class="slide" id="concepts-basics">
