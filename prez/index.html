@@ -59,6 +59,12 @@
 		</ul>
 	</section>
 
+	<section class="slide" id="minute-pub-lt">
+		<h2>Et Lateral Thought ?</h2>
+		<img src="img/lt-logo.png" />
+		<p>Société</p>
+	</section>
+
 	<section class="slide" id="plan">
 		<h2>Plan</h2>
 		<ol>
@@ -256,11 +262,18 @@
 
 	<section class="slide" id="representations-de-graphe">
 		<h2>Autres modes de représentations</h2>
-		<p>TODO: même graphe, avec liste d'adjacence & matrice d'adjacence
-		<img src="img/graph_representations.png"/>
+		<p>Sous forme de matrice d'adjacence : </p>
+		<img src="img/matrice_adjacence.jpg"/>
 	</section>
 
-	<section class="slide" id="representations-de-graphe">
+	<section class="slide" id="representations-de-graphe2">
+		<h2>Autres modes de représentations</h2>
+		<p>Sous forme de liste d'adjacence : <i>tableau de liste de sommet</i></p>
+		<img src="img/liste_adj.jpg"/>
+	</section>
+
+
+	<section class="slide" id="recherche-graphe">
 		<h2>Recherche sur graphe (I/III)</h2>
 		<h3>Breadth-first search</h3>
 		<img style="display:block" src="img/breadth_first_search.gif"/>
@@ -271,7 +284,7 @@
 		</ul>
 	</section>
 
-	<section class="slide" id="representations-de-graphe">
+	<section class="slide" id="recherche-de-graphe2">
 		<h2>Recherche sur graphe (II/III)</h2>
 		<h3>Depth-first search</h3>
 		<img style="display:block" src="img/depth_first_search.gif"/>
@@ -289,7 +302,7 @@
 		</ul>
 	</section>
 
-	<section class="slide" id="representations-de-graphe">
+	<section class="slide" id="recherche-de-graphe3">
 		<h2>Recherche sur graphe (III/III)</h2>
 		<h3>Tri topologique avec une depth-first search <span class="small">(très fortement inspiré de la figure 22.7 de "Introduction to Algorithms", chapitre 22.4)</span></h3>
 		<p>Avant:</p>
@@ -378,7 +391,8 @@ public void demonstration() {
 		<h2>Exemple II &middot; traversée de graphe</h2>
 		<p>Quizz: combien de noeuds sont retournés ?</p>
 		<textarea class="code" mode="text/x-java" style="display: none;">
-Traverser traverser = iAmANode.traverse(BREADTH_FIRST, DEPTH_ONE, new ReturnableEvaluator() {
+Traverser traverser = iAmANode.traverse(BREADTH_FIRST, DEPTH_ONE, 
+		new ReturnableEvaluator() {
 	@Override
 	public boolean isReturnableNode(TraversalPosition position) {
 		Node currentNode = position.currentNode();
@@ -413,11 +427,26 @@ transaction.success();
 		<h1>Présentation de SpringData</h1>
 	</section>
 	
+	<section class="slide" id="spring">
+		<h2>L'écosystème Spring</h2>
+		<img src="img/spring-logo.png" />
+		<p>Spring est à la base un framework d'injection de dépendance simplifiant les développements et la testabilité des projets Java/JEE</p>
+		</div>
+		<p>L'écosystème s'est aggrandi au delà de l'injection de dépendance pour compter :</p>
+		<ul>
+			<li>Spring Security</li>
+			<li>Spring Batch</li>
+			<li>Spring Social</li>
+			<li>...</li>
+			<li><strong>et aussi SpringData qui nous intéresse aujourd'hui</strong></li>
+		</ul>
+	</section>
+	
 	<section class="slide" id="famille-springdata">
 		<h2><a href="http://www.springsource.org/spring-data">SpringData/*</a></h2>
 		<div style="overflow:auto;">
 			<img style="display:block; float:left;" src="img/Project_Data.png" />
-			<p style="width:50%; float:left; margin-left:40px; line-height:42px;">Projet ombrelle visant à faciliter l'intégration de la couche d'accès aux données aux applications se reposant sur Spring framework.</p>
+			<p style="width:50%; float:left; margin-left:40px; line-height:42px;">Projet ombrelle visant à faciliter l'intégration de la couche d'accès aux données aux applications se reposant sur le framework Spring d'injection de dépendances.</p>
 		</div>
 		<p>Parmi ses membres, on retrouve :</p>
 		<ul>
@@ -510,16 +539,26 @@ public class StatusRedaction {
 				<textarea class="code" mode="text/x-java" style="display: none;">
 public interface PersonRepository extends GraphRepository<Person> {
 	/*
-	 * QUERY MEANING: get all relationships "WRITES" a.k.a. StatusRedaction
-	 * related to the identified Person, sorted by descending creation date
+	 * QUERY MEANING: 
+	 *  get all relationships "WRITES" 
+	 * 	a.k.a. StatusRedaction
+	 * 	related to the identified Person, 
+	 * 	sorted by descending creation date
 	 */
-	@Query(type = Cypher, value = "START person=node({0}) MATCH (person)-[relationship:WRITES]->() RETURN relationship ORDER BY relationship.creationDate DESC")
-	Page&lt;StatusRedaction&gt; findSortedStatuses(Long personId, Pageable pageRequest);
+	@Query(type = Cypher, 
+		value = "START person=node({0}) " +
+			"MATCH (person)-[relationship:WRITES]->() " +
+			"RETURN relationship " +
+			"ORDER BY relationship.creationDate DESC")" +
+	Page&lt;StatusRedaction&gt; findSortedStatuses(Long personId, 
+		Pageable pageRequest);
 	/*
-	 * QUERY MEANING: get all outgoing edges of type WORKS_WITH (a.k.a.
-	 * ToolUsage) of the specified vertex
+	 * QUERY MEANING: 
+	 * 	get all outgoing edges of type WORKS_WITH 
+	 * 	(a.k.a. ToolUsage) of the specified vertex
 	 */
-	@Query(type = Gremlin, value = "g.v({0}).outE.filter(it.type=\"WORKS_WITH\")")
+	@Query(type = Gremlin, 
+		value = "g.v({0}).outE.filter(it.type=\"WORKS_WITH\")")
 	Set&lt;ToolUsage&gt; findTools(Long personId);
 }				</textarea>
 			</li>
