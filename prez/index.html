@@ -137,6 +137,7 @@
 		<ul>
 			<li>les bases de données hiérarchiques (Adabas, <em>SoftwareAG</em>)</li>
 			<li>les bases de données objet</li>
+			<li>les bases de données XML</li>
 		</ul>
 		<p>ne se sont peu ou pas imposés.</p>
 	</section>
@@ -146,9 +147,9 @@
 		<p>Côté applicatif, c'est le paradigme objet qui s'est imposé (on en revient). Soit :</p>
 		<ul>
 			<li>d'un côté, un monde objet</li>
-			<li>de l'autre, un monde de relations<li>
+			<li>de l'autre, un monde de relations</li>
 		</ul>
-		<p>Cela a donc donné naissance aux... Object-Relational Mappers : un pont qui entre deux paradigmes complètement différents.</p>
+		<p>Cela a donc donné naissance aux... <strong>O</strong>bject-<strong>R</strong>elational <strong>M</strong>appers : un pont qui entre deux paradigmes complètement différents.</p>
 	</section>
 
 	<section class="slide" id="relationnel-gagne">
@@ -351,10 +352,11 @@
 	<section class="slide" id="recherche-de-graphe2">
 		<h2>Recherche sur graphe (II/III)</h2>
 		<h3>Depth-first search</h3>
-		<img style="display:block" src="img/depth_first_search.gif"/>
+		<img style="display:block; float: left" src="img/depth_first_search.gif"/>
+		<div class="slide" style="float: right">
 		<p>Propriétés intéressantes:</p>		
 		<ul>
-			<li>Classification des <em>edges<em>:
+			<li>Classification des <em>edges</em>:
 				<ul>
 					<li>tree edges</li>
 					<li>back edges</li>
@@ -364,6 +366,7 @@
 			</li>
 			<li>Tri topologique possible</li>
 		</ul>
+	</div>
 	</section>
 
 	<section class="slide" id="recherche-de-graphe3">
@@ -409,13 +412,19 @@ private GraphDatabaseService graphDatastore = new EmbeddedGraphDatabase(PATH);
 public void demonstration() {
 	Transaction transaction = graphDatastore.beginTx();
 	try {
+		// création du noeud
 		Node iAmANode = graphDatastore.createNode();
+		// le noeud a comme "name" : "whatever"
 		iAmANode.setProperty("name", "whatever");
+		// crée un autre noeud
 		Node anotherNode = graphDatastore.createNode();
+		// lie les deux par une relation "ROMANTIC" 
 		iAmANode.createRelationshipTo(anotherNode, ROMANTIC);
+		// commit : tout est persisté
 		transaction.success();
 	}
 	catch (Exception e) {
+		// rollback : rien n'est persisté
 		transaction.failure();
 	}
 	finally {
