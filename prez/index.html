@@ -85,13 +85,7 @@
 				<h3>NOSQL ?</h3>
 			</li>
 			<li>
-				<h3>Les graphes dans tout ça ?</h3>
-			</li>
-			<li>
 				<h3>Neo4J</h3>
-			</li>
-			<li>
-				<h3>Cohabitation avec l'existant</h3>
 			</li>
 		</ol>
 	</section>
@@ -116,7 +110,7 @@
 			<li>Le terme date de 1998 et est popularisé en 2009</li>
 			<li>Il regroupe des bases de données très différentes</li>
 			<li>Éloigné du modèle relationnel des SGBDR (Oracle, PostgreSQL etc.)</li>
-			<li>Souvent associé à des modèles échelonnables, mais pas que.</li>
+			<li>Souvent associé à des modèles scalables, mais pas que.</li>
 		</ul>
 	</section>
 
@@ -142,7 +136,7 @@
 	</section>
 
 	<section class="slide" id="hegemonie-relationnelle-probleme">
-		<h2>L'hégémonie relationnelle</h2>
+		<h2>L'hégémonie relationnelle vs Les autres BDD</h2>
 		<p>Les autres modèles telles que :</p>
 		<ul>
 			<li>les bases de données hiérarchiques (Adabas, <em>SoftwareAG</em>)</li>
@@ -153,25 +147,27 @@
 	</section>
 
 	<section class="slide" id="hegemonie-relationnelle-probleme-2">
-		<h2>L'hégémonie relationnelle</h2>
+		<h2>L'hégémonie relationnelle vs la Programmation Orienté Objet</h2>
 		<p>Côté applicatif, c'est le paradigme objet qui s'est imposé (on en revient). Soit :</p>
 		<ul>
 			<li>d'un côté, un monde objet</li>
 			<li>de l'autre, un monde de relations</li>
 		</ul>
-		<p>Cela a donc donné naissance aux... <strong>O</strong>bject-<strong>R</strong>elational <strong>M</strong>appers : un pont qui entre deux paradigmes complètement différents.</p>
+		<p>Cela a donc donné naissance aux... <strong>O</strong>bject-<strong>R</strong>elational <strong>M</strong>appers (côté Java: JPA a.k.a. JSR 317) : un pont entre deux paradigmes complètement différents...</p>
+		<p class="slide">... avec beaucoup plus de contraintes qu'on veut nous faire croire.</p>
 	</section>
 
 	<section class="slide" id="relationnel-gagne">
-		<h2>L'hégémonie relationnelle</h2>
+		<h2>Le modèle relationnel actuellement menacé ?</h2>
 		<p>Certains cas d'utilisation avancés (exemple : "indexer le web") ont poussé le modèle relationnel à bout. 
-			Notamment pour les raisons suivantes :</p>
-		<ul>
-			<li>ACID et SQL coûtent cher</li>
-			<li>Le seul vrai moyen efficace de rendre scalable une BDD relationnelle, c'est le sharding !</li>
-			<li><strong>Le SHARDING c'est dur !</strong> et ça dépend beaucoup du métier...</li>
-			<li>Le théorème CAP de Brewer est inévitable</li>
+			Notamment à cause des contraintes suivantes :</p>
+		<ul class="slide">
+			<li>ACID</li>
+			<li>SQL</li>
+			<li>SHARDING</li>
+			<li>cf. CAP de Brewer</li>
 		</ul>
+		<h1 class="slide">BUZZWORD WARNING !</h1>
 	</section>
 
 	<section class="slide" id="relationnel-rappels-acid">
@@ -204,7 +200,7 @@
 		<p>... et il a ses limites :</p>
 		<ul>
 			<li>ACID et SQL coûtent cher</li>
-			<li>Le seul vrai moyen efficace de rendre échelonnable une BDD relationnelle, c'est le sharding !</li>
+			<li>Le seul vrai moyen efficace de rendre scalable une BDD relationnelle, c'est le sharding !</li>
 			<li><strong>Le SHARDING c'est dur !</strong> et ça dépend beaucoup du métier...</li>
 			<li>Le théorème CAP de Brewer est inévitable</li>
 		</ul>
