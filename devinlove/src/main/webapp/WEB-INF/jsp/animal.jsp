@@ -11,7 +11,7 @@
     <script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </head>
 <body>
-	<c:import url="/jsp/header.jsp" />
+	<c:import url="/WEB-INF/jsp/header.jsp" />
 	<div class="container">
 	    <div class="row">
 		    <div class="span3">
@@ -23,7 +23,7 @@
 	        </ul>
         </div>
     </div>
-	<c:import url="/jsp/footer.jsp" />
+	<c:import url="/WEB-INF/jsp/footer.jsp" />
 </div>
 </body>
 </html>

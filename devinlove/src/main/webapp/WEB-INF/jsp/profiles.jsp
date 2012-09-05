@@ -11,7 +11,7 @@
     <script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </head>
 <body>
-	<c:import url="/jsp/header.jsp" />
+	<c:import url="/WEB-INF/jsp/header.jsp" />
 	<div class="container">
 		<c:choose>
 			<c:when test="${empty profiles}">
@@ -31,6 +31,6 @@
 		    </c:otherwise>
 		</c:choose>
 	</div>
-	<c:import url="/jsp/footer.jsp" />
+	<c:import url="/WEB-INF/jsp/footer.jsp" />
 </body>
 </html>

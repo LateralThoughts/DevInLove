@@ -12,7 +12,7 @@
     <script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </head>
 <body>
-	<c:import url="/jsp/header.jsp" />
+	<c:import url="/WEB-INF/jsp/header.jsp" />
 	<div class="container">
 		<div class="page-heading well" id="profile-heading">
 			<div class="span2"><img class="pull-left" src="<c:url value="/resources/img/default_avatar.jpg" />" alt=""/></div>
@@ -90,6 +90,6 @@
 			
 		</div>
 	</div>
-	<c:import url="/jsp/footer.jsp" />
+	<c:import url="/WEB-INF/jsp/footer.jsp" />
 </body>
 </html>

@@ -15,7 +15,7 @@
 	</style>
 </head>
 <body>
-	<c:import url="/jsp/header.jsp" />
+	<c:import url="/WEB-INF/jsp/header.jsp" />
 	<div class="container">
         <div class="hero-unit">
 		    <h2>Well, almost there. With more time, we could have shown:</h2>
@@ -33,6 +33,6 @@ RETURN p</code></pre>
 		    </ul>
 	    </div>
 	</div>
-	<c:import url="/jsp/footer.jsp" />
+	<c:import url="/WEB-INF/jsp/footer.jsp" />
 </body>
 </html>

@@ -11,7 +11,7 @@
     <script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </head>
 <body>
-	<c:import url="/jsp/header.jsp" />
+	<c:import url="/WEB-INF/jsp/header.jsp" />
 	<div class="container">
         <div class="hero-unit">
 		    <h1>Dev... In &hearts;!</h1>
@@ -23,6 +23,6 @@
         	Well. Actually. This is just a demo about SpringData/Neo4J. Really.
 	    </div>
 	</div>
-	<c:import url="/jsp/footer.jsp" />
+	<c:import url="/WEB-INF/jsp/footer.jsp" />
 </body>
 </html>
