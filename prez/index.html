@@ -256,15 +256,36 @@
 		<p>Bien sûr il n'y a ici que les principaux acteurs du genre.</p>
 	</section>
 
-	<section class="slide" id="nosql-tour">
-		<h2>Key/Value</h2>
-		<p>IMG KEY/VALUE</p>
+	<section class="slide" id="nosql-tour-key-value">
+		<h2>SGBD vs Key/Value</h2>
+		<img style="float:left" src="img/key_value_rdb.jpeg" />
+		<img class="slide" style="float:right" src="img/key_value.jpeg" />
+	</section>
 
+	<section class="slide" id="nosql-tour-doc">
 		<h2>Document</h2>
-		<p>IMG DOCUMENT</p>
+		<textarea type="application/json" class="code" mode="application/json" style="display: none;">
+{ 
+	author: 'joe',
+	created : new Date('03/28/2009'),
+	title : 'Yet another blog post',
+	text : 'Here is the text...',
+	tags : [ 'example', 'joe' ],
+	comments : [ 
+		{ 
+			author: 'jim', 
+			comment: 'I disagree' 
+		}, { 
+			author: 'nancy', 
+			comment: 'Good post' 
+		} ]
+}
+		</textarea>
+	</section>
 
+	<section class="slide" id="nosql-tour-column">
 		<h2>Column</h2>
-		<p>IMG Column</p>
+		<p><img src="img/cassandra_data_model.png"/></p>
 	</section>
 	
 	<section class="slide" id="nosql-enfin">
@@ -664,18 +685,19 @@ public interface PersonRepository extends GraphRepository<Person> {
 		</ul>
 	</section>
 	
-	<section class="slide" id="genea">
-		<h1>Arbre généalogique</h1>
-	</section>
-	<section class="slide" id="genea-concept">
-		<h2>But</h2>
-		<ul>
-			<li>réaliser l'import du graphe</li>
-			<li>visualiser le graphe</li>
-			<li>le requêter</li>
-		</ul>
-		<h1>TODO</h1>
-		<img src="img/arbre.png" alt="TODO" />
+    <section class="slide" id="devinlove">
+ 		<h1>DevInLove!</h1>  	
+    </section>	
+	<section class="slide" id="devinlove-concept">  	
+		<h2>Concept :</h2>
+    	<p> Vous permettre de trouver l'âme soeur programmatiquement en se basant :
+    	  <ul>
+    	    <li>Sur vos mascottes préférées : <strong>Tux, Django Poney, elePHPant</strong></li>
+    	    <li>Vos outils favoris : IntelliJIDEA, Eclipse, Git, CVS...</li>
+    	    <li>etc...</li>
+    	  </ul>
+    	</p>
+    	<img src="img/graph.png" alt="" width="90%" />
  	</section>
 	
 	<section class="slide" id="neo4j-et-existant">
