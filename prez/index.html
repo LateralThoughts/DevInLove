@@ -486,15 +486,20 @@ public void demonstration() {
 	
 	<section class="slide" id="concepts-suite">
 		<h2>Exemple II &middot; traversée de graphe</h2>
-		<p>Quizz: combien de noeuds sont retournés ?</p>
 		<textarea class="code" mode="text/x-java" style="display: none;">
+// chaque vertex dispose d'une méthode traverse
 Traverser traverser = iAmANode.traverse(BREADTH_FIRST, DEPTH_ONE, 
-		new ReturnableEvaluator() {
-	@Override
-	public boolean isReturnableNode(TraversalPosition position) {
-		Node currentNode = position.currentNode();
-		return currentNode.hasRelationship(ROMANTIC, BOTH);
-	}
+	/* 
+	classe anonyme à 1 méthode (~ fonction en Java) 
+	définissant le critère d'arrêt de la traversée
+	*/
+	new ReturnableEvaluator() {
+		// contrat imposé par l'interface ReturnableEvaluator
+		@Override
+		public boolean isReturnableNode(TraversalPosition position) {
+			Node currentNode = position.currentNode();
+			return currentNode.hasRelationship(ROMANTIC, BOTH);
+		}
 }, ROMANTIC, BOTH);
 	
 for (Node node : traverser.getAllNodes()) {
@@ -514,7 +519,6 @@ Node node = graphDatastore.createNode();
 index.add(node, "key", "value");
 index.remove(node, "key", "value");
 index.delete();
-transaction.success();
 		</textarea>
 		<p>Les index supportent également le pseudo-requêtage sur les valeurs indexées (ex: <code>index.query("key","*e*")</code>).</p>
 	</section>
@@ -711,8 +715,15 @@ public interface PersonRepository extends GraphRepository<Person> {
 		</p>
 		<h3>Exemple <span style="font-size:9pt;">(tiré de &ldquo;Good Relationships, The Spring Data Neo4j Guide Book&rdquo;)</span></h3>
 		<textarea class="code" mode="text/x-java" style="display: none;">
+/**
+ * Entité JPA
+ */
 @Entity
 @Table(name = "user_account")
+/**
+ * Entité partielle Neo4J (rien n'est persisté dans le graphe
+ * sauf ce qui est explicitement annoté)
+ */
 @NodeEntity(partial = true)
 public class UserAccount {
 	private String userName;
