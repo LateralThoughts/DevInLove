@@ -114,20 +114,50 @@
 		<h1>&lt;Flashback about="le modèle relationnel"&gt;</h1>
 	</section>
 
-	<section class="slide" id="bases-relationnelles">
-		<h2>L'hégémonie relationnelle</h2>
-		<p>Le modèle relationnel a éte défini par <a href="http://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf">Edgar Codd</a> il y a 40 ans ...</p>
+	<section class="slide" id="bases-relationnel-concepts">
+		<h2>Les concepts basics</h2>
+		<p>Le modèle relationnel a éte défini par <a href="http://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf">Edgar Codd</a> il y a 40 ans.<br />Une base de données relationnelle est faite de : </p>
+		<ul>
+			<li>tables</li>
+			<li>... elles-mêmes faites de colonnes</li>
+			<li>... définies avec certaines propriétés (identité, unicité, nullabilité ...)</li>
+			<li>... et dont certaines référencent des colonnes d'autres tables</li>
+		</ul>
+	</section>
+
+	<section class="slide" id="bases-relationnelles-illustration">
+		<h2>Illustration</h2>
 		<img style="display:block;" src="img/relational.png" />
 		<img style="display:block; border:2px solid black;" src="img/relational_details.png" />
-		<p>... et il domine toujours.</p>
+	</section>
+
+	<section class="slide" id="hegemonie-relationnelle-probleme">
+		<h2>L'hégémonie relationnelle</h2>
+		<p>Les autres modèles telles que :</p>
+		<ul>
+			<li>les bases de données hiérarchiques (Adabas, <em>SoftwareAG</em>)</li>
+			<li>les bases de données objet</li>
+		</ul>
+		<p>ne se sont peu ou pas imposés.</p>
+	</section>
+
+	<section class="slide" id="hegemonie-relationnelle-probleme">
+		<h2>L'hégémonie relationnelle</h2>
+		<p>Côté applicatif, c'est le paradigme objet qui s'est imposé (on en revient). Soit :</p>
+		<ul>
+			<li>d'un côté, un monde objet</li>
+			<li>de l'autre, un monde de relations<li>
+		</ul>
+		<p>Cela a donc donné naissance aux... Object-Relational Mappers : un pont qui entre deux paradigmes complètement différents.</p>
 	</section>
 
 	<section class="slide" id="relationnel-gagne">
 		<h2>L'hégémonie relationnelle</h2>
-		<p>... et il a ses limites :</p>
+		<p>Certains cas d'utilisation avancés (exemple : "indexer le web") ont poussé le modèle relationnel à bout. 
+			Notamment pour les raisons suivantes :</p>
 		<ul>
 			<li>ACID et SQL coûtent cher</li>
-			<li>Le seul vrai moyen efficace de rendre échelonnable une BDD relationnelle, c'est le sharding !</li>
+			<li>Le seul vrai moyen efficace de rendre scalable une BDD relationnelle, c'est le sharding !</li>
 			<li><strong>Le SHARDING c'est dur !</strong> et ça dépend beaucoup du métier...</li>
 			<li>Le théorème CAP de Brewer est inévitable</li>
 		</ul>
@@ -244,7 +274,9 @@
 		</ul>
 	</section>
 
-	<section class="slide" id="nosql-avenir">
+	<section class="slide" id="nosql-point-communs">
+		<h2>Spécialisation</h2>
+		<p>Dans la même mouvance que le Polyglot Programming (1 langage pour 1 cas d'utilisation), chaque type de datastore NOSQL correspond à des contraintes métier différentes.</p>
 		<h2>Et si on s'orientait vers ça ?</h2>
 		<img src="img/polyglot_bdd.png"/>
 	</section>
