@@ -21,20 +21,21 @@
 		</repository>
 	</repositories>
 	<properties>
+        <jdk.version>1.6</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-data-neo4j.version>2.0.0.RELEASE</spring-data-neo4j.version>
-		<neo4j-version>1.6</neo4j-version>
-		<gremlin.version>1.4</gremlin.version>
-		<eclipse-lifecycle-mapping.version>1.0.0</eclipse-lifecycle-mapping.version>
+		<spring-data-neo4j.version>2.1.0.RC3</spring-data-neo4j.version>
+		<neo4j-version>1.8.RC1</neo4j-version>
+		<gremlin.version>1.5</gremlin.version><!-- 2.1.0 now :/ -->
 		<resources-plugin.version>2.4.3</resources-plugin.version>
 		<junit.version>4.10</junit.version>
 		<fest-assert.version>1.4</fest-assert.version>
 		<surefire-plugin.version>2.12</surefire-plugin.version>
 		<joda-time.version>2.0</joda-time.version>
-		<spring.version>3.0.7.RELEASE</spring.version>
-		<guava.version>11.0.1</guava.version>
-		<jdk.version>1.6</jdk.version>
-		<compiler-plugin.version>2.3.2</compiler-plugin.version>
+		<spring.version>3.1.2.RELEASE</spring.version>
+		<guava.version>13.0.1</guava.version>
+
+        <eclipse-lifecycle-mapping.version>1.0.0</eclipse-lifecycle-mapping.version>
+        <compiler-plugin.version>2.3.2</compiler-plugin.version>
 		<servlet-api.version>2.5</servlet-api.version>
 		<aspectj.version>1.6.12</aspectj.version>
 		<pretty-time.version>1.0.7</pretty-time.version>
@@ -105,6 +106,12 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
