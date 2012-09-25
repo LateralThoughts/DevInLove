@@ -20,7 +20,7 @@
     <tx:annotation-driven/>
 
     <!-- Set up where to store the database-->
-    <neo4j:config storeDirectory="data/graph.db"/>
+    <neo4j:config storeDirectory="target/graph.db"/>
 
     <!-- Where to scan for beans repository -->
     <neo4j:repositories base-package="com.lateralthoughts.devinlove.repository"/>
