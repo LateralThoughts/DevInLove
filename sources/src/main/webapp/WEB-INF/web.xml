@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-        id="DevInLove" version="2.5">
+        id="DevInLove">
     <display-name>DevInLove &lt;3</display-name>
     <description>Neo4j Spring Data Application to find your true soulmate or nemesis</description>
 
+
+    <!-- Creates the Spring Container shared by all Servlets and Filters -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:META-INF/applicationContext*.xml</param-value>
+        <param-value>classpath*:devinlove-core.xml</param-value>
     </context-param>
 
     <!-- Reads request input using UTF-8 encoding -->
@@ -31,15 +36,16 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- Creates the Spring Container shared by all Servlets and Filters -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
 
     <!-- delegates incoming requests to Spring MVC front Servlet -->
     <servlet>
         <servlet-name>devinlove</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:devinlove-servlet.xml
+            </param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 

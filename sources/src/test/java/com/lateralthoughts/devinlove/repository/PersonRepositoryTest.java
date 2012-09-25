@@ -15,7 +15,7 @@ import com.lateralthoughts.devinlove.domain.Mascot;
 import com.lateralthoughts.devinlove.domain.Person;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:META-INF/applicationContext.xml")
+@ContextConfiguration("classpath:devinlove-core.xml")
 @Transactional
 public class PersonRepositoryTest {
 

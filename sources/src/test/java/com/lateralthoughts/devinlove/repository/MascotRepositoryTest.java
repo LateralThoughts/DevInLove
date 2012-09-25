@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.lateralthoughts.devinlove.domain.Mascot;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:META-INF/applicationContext.xml")
+@ContextConfiguration("classpath:devinlove-core.xml")
 public class MascotRepositoryTest {
 
 	@Autowired
