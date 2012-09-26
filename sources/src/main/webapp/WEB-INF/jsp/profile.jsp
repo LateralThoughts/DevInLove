@@ -7,12 +7,10 @@
 <html>
 <head>
     <title>DevInLove &middot; Tékitoi?</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />"/>
-    <script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+    <c:import url="includes/head.jsp" />
 </head>
 <body>
-	<c:import url="/WEB-INF/jsp/header.jsp" />
+	<c:import url="includes/header.jsp" />
 	<div class="container">
 		<div class="page-heading well" id="profile-heading">
 			<div class="span2"><img class="pull-left" src="<c:url value="/resources/img/default_avatar.jpg" />" alt=""/></div>
@@ -90,6 +88,6 @@
 			
 		</div>
 	</div>
-	<c:import url="/WEB-INF/jsp/footer.jsp" />
+	<c:import url="includes/footer.jsp" />
 </body>
 </html>

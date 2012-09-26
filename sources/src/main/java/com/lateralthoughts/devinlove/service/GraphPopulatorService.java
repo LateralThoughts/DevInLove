@@ -23,23 +23,23 @@ import com.lateralthoughts.devinlove.domain.Tool;
 import com.lateralthoughts.devinlove.domain.ToolAffinity;
 import com.lateralthoughts.devinlove.repository.CategoryRepository;
 import com.lateralthoughts.devinlove.repository.MascotRepository;
-import com.lateralthoughts.devinlove.repository.PersonRepository;
 import com.lateralthoughts.devinlove.repository.ToolRepository;
 
 @Service
 @Transactional
-public class GraphPopulator {
+public class GraphPopulatorService {
 
 	@Autowired
 	private MascotRepository mascotRepository;
 	@Autowired
-	private PersonRepository personRepository;
+	private PersonService personService;
 	@Autowired
 	private ToolRepository toolRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private StatusService statusService;
+
 	private Mascot tux;
 	private Mascot django;
 
@@ -91,14 +91,15 @@ public class GraphPopulator {
 		toolRepository.save(tool("Python", "LANGUAGE", "3.2.2", 1994, 1, 1, false));
 		toolRepository.save(tool("Maven", "TOOL", "3.0.4", 2001, 1, 8, false));
 		toolRepository.save(tool("Ubuntu", "OPERATING SYSTEM", "11.10", 2004, 20, 10, false));
-		toolRepository.save(tool("Neo4J", "DATABASE", "1.6", 2007, 25, 12, true));
+		toolRepository.save(tool("Neo4J", "DATABASE", "1.7", 2007, 25, 12, true));
 	}
 
 	private void loadABunchOfPeopleIntoTheMatrix() {
-		Person florent = person("Florent", "Biville", "blue", tux, DEVELOPER, 42, "Hello world", tastesOfFlorent());
-		statusService.saveNewStatus(new Status("Associé chez Lateral-Thoughts"), florent);
-		Person olivier = person("Olivier", "Girardot", "green", django, DEVELOPER, 45, "A World Appart (Info)", tasteOfOlivier());
-		personRepository.save(olivier);
+		Person florent = person("flo@mail.me", "secret", "Florent", "Biville", "blue", tux, DEVELOPER, 42, "Hello world", tastesOfFlorent());
+        personService.save(florent);
+        statusService.saveNewStatus(new Status("Associé chez Lateral-Thoughts"), florent);
+		Person olivier = person("olivier@appart.info", "secret", "Olivier", "Girardot", "green", django, DEVELOPER, 45, "A World Appart (Info)", tasteOfOlivier());
+		personService.save(olivier);
 		statusService.saveNewStatus(new Status("Fondateur et associé chez Lateral-Thoughts"), olivier);
 
     }
@@ -126,8 +127,10 @@ public class GraphPopulator {
 		return category;
 	}
 
-	private Person person(final String firstName, final String lastName, final String color, final Mascot mascot, final ProfoundIdentity profoundIdentity, final int shoeSize, final String firstStatus, final Map<String, ToolAffinity> toolAffinities) {
+	private Person person(final String email, final String pass, final String firstName, final String lastName, final String color, final Mascot mascot, final ProfoundIdentity profoundIdentity, final int shoeSize, final String firstStatus, final Map<String, ToolAffinity> toolAffinities) {
 		Person person = new Person();
+        person.setEmail(email);
+        person.setPass(pass);
 		person.setFavoriteColor(color);
 		person.setFirstName(firstName);
 		person.setLastName(lastName);

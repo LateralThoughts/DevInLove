@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lateralthoughts.devinlove.domain.Person;
 import com.lateralthoughts.devinlove.domain.Status;
-import com.lateralthoughts.devinlove.repository.PersonRepository;
 import com.lateralthoughts.devinlove.repository.StatusRepository;
 
 @Service
@@ -17,11 +16,11 @@ public class StatusService {
 	@Autowired
 	private StatusRepository statusRepository;
 	@Autowired
-	private PersonRepository personRepository;
+	private PersonService personService;
 
 	public void saveNewStatus(final Status status, final Person author) {
 		statusRepository.save(status);
 		author.addStatus(status, new Date());
-		personRepository.save(author);
+		personService.save(author);
 	}
 }

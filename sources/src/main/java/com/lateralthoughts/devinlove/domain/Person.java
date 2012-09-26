@@ -1,50 +1,56 @@
 package com.lateralthoughts.devinlove.domain;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static java.util.Collections.unmodifiableSet;
-import static org.neo4j.graphdb.Direction.BOTH;
-import static org.neo4j.graphdb.Direction.OUTGOING;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.neo4j.annotation.*;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
-import org.springframework.data.neo4j.annotation.RelatedToVia;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.Collections.unmodifiableSet;
+import static javax.persistence.GenerationType.AUTO;
+import static org.neo4j.graphdb.Direction.BOTH;
+import static org.neo4j.graphdb.Direction.OUTGOING;
 
 
 /**
  * We are all human (almost).
  */
-@NodeEntity
+@Entity
+@Table(name = "accounts")
+@NodeEntity(partial = true)
 @TypeAlias("person")
 public class Person {
-	@GraphId
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = AUTO)
+    @Column(name = "id")
+    private Long id;
+    @Column
+    private String email;
+    @Column(name = "password")
+    private String pass;
+    @GraphProperty
 	private String firstName;
+    @GraphProperty
 	private String lastName;
+    @GraphProperty
 	private String favoriteColor;
+    @GraphProperty
+    private int shoeSize;
+    @GraphProperty
 	@Fetch
 	private Mascot mascot;
+    @GraphProperty
+    private String profoundIdentity;
 	@RelatedTo(elementClass = Person.class, type = "IS_FRIEND_WITH", direction = BOTH)
 	private Set<Person> friends = new LinkedHashSet<Person>();
-
 	@RelatedToVia(elementClass = ToolUsage.class, type = "WORKS_WITH", direction = OUTGOING)
 	private Set<ToolUsage> tools = new LinkedHashSet<ToolUsage>();
-	/**
-	 * Simplistic European-formatted shoe size
-	 */
-	private int shoeSize;
-
 	@RelatedToVia(elementClass = StatusRedaction.class, type = "WRITES", direction = OUTGOING)
     @Fetch
 	private Set<StatusRedaction> statuses = new LinkedHashSet<StatusRedaction>();
-
-	private String profoundIdentity;
 
 	public Long getId() {
 		return id;
@@ -126,36 +132,19 @@ public class Person {
 		this.lastName = lastName;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((getFirstName() == null) ? 0 : getFirstName().hashCode());
-		result = prime * result + ((getLastName() == null) ? 0 : getLastName().hashCode());
-		return result;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Person other = (Person) obj;
-		if (getFirstName() == null) {
-			if (other.getFirstName() != null)
-				return false;
-		}
-		else if (!getFirstName().equals(other.getFirstName()))
-			return false;
-		if (getLastName() == null) {
-			if (other.getLastName() != null)
-				return false;
-		}
-		else if (!getLastName().equals(other.getLastName()))
-			return false;
-		return true;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 }

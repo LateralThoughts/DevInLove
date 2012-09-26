@@ -3,10 +3,12 @@ package com.lateralthoughts.devinlove.repository;
 import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
 import static org.fest.assertions.Assertions.assertThat;
 
+import com.lateralthoughts.devinlove.service.PersonService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,15 +19,17 @@ import com.lateralthoughts.devinlove.domain.Person;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:devinlove-core.xml")
 @Transactional
-public class PersonRepositoryTest {
+public class PersonServiceTest {
 
 	@Autowired
-	private PersonRepository personRepository;
+	private PersonService personService;
 	private Person person;
 
 	@Before
 	public void setup() {
 		person = new Person();
+        person.setEmail("flo@email.me");
+        person.setPass("secret");
 		person.setFirstName("Florent");
 		person.setLastName("Biville");
 		person.setShoeSize(42);
@@ -38,8 +42,8 @@ public class PersonRepositoryTest {
 
 	@Test
 	public void when_inserting_then_retrievable() {
-		assertThat(personRepository).isNotNull();
-		personRepository.save(person);
+		assertThat(personService).isNotNull();
+        personService.save(person);
 		assertThat(person.getId()).isGreaterThan(0L);
 	}
 }

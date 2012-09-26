@@ -11,7 +11,7 @@
 <script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </head>
 <body>
-	<c:import url="/WEB-INF/jsp/header.jsp" />
+	<c:import url="includes/header.jsp" />
 	<div class="container">
 		<h1>Doh!
 			<small>Dude, where is my page?</small>

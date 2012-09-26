@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <http pattern="/resources/**" security="none"/>
+
+    <http use-expressions="true">
+        <!-- Authentication policy -->
+        <form-login login-page="/login.html" />
+        <logout logout-url="/logout.html" delete-cookies="JSESSIONID"/>
+
+        <intercept-url pattern="/login.html" access="permitAll" />
+        <intercept-url pattern="/index.html" access="permitAll" />
+
+        <!-- resources interception -->
+        <intercept-url pattern="/favicon.ico" access="permitAll"/>
+        <intercept-url pattern="/img/**" access="permitAll"/>
+        <intercept-url pattern="/scripts/**" access="permitAll"/>
+        <intercept-url pattern="/css/**" access="permitAll"/>
+
+        <!--<intercept-url pattern="/signup/**" access="permitAll"/>-->
+        <!--<intercept-url pattern="/signin/**" access="permitAll"/>-->
+        <!--<intercept-url pattern="/api/user" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/api/account/*" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/secure/**" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/account/**" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/photo/**" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/dashboard/**" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/inbox/**" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/unread" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/profile" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/profile/**/contact/**" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/profile/**" access="permitAll"/>-->
+        <!--<intercept-url pattern="/conversation/**" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/pricing/**" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/answer/**" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/close/**" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/emailvalidation/**" access="permitAll"/>-->
+        <!--<intercept-url pattern="/disconnect/facebook" access="permitAll"/>-->
+        <intercept-url pattern="/**" access="permitAll"/>
+    </http>
+
+    <beans:bean id="passwordencoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="loginService">
+            <password-encoder ref="passwordencoder" />
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>

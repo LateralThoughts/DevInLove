@@ -1,22 +1,17 @@
 package com.lateralthoughts.devinlove.domain;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static java.util.Arrays.asList;
-import static java.util.Collections.unmodifiableSet;
-import static org.neo4j.graphdb.Direction.INCOMING;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.neo4j.annotation.*;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.Indexed;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
-import org.springframework.data.neo4j.annotation.RelatedToVia;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableSet;
+import static org.neo4j.graphdb.Direction.INCOMING;
 
 /**
  * Tool that people can love or hate use during their company time or free time.
@@ -36,17 +31,7 @@ public class Tool {
 	private boolean revolutionary;
 	@RelatedTo(type = "CREATED", direction = INCOMING)
 	private final Set<Person> authors = new LinkedHashSet<Person>();
-	@RelatedTo(type = "WORKS_WITH", direction = INCOMING)
-	Set<Person> users = new LinkedHashSet<Person>();
-	@RelatedToVia(type = "WORKS_WITH", direction = INCOMING)
-	@Fetch
-	private Iterable<ToolUsage> usage;
 
-
-
-	public Iterable<ToolUsage> getUsage() {
-		return usage;
-	}
 
 	public void setName(final String name) {
 		this.name = name;

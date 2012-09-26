@@ -14,7 +14,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:devinlove-core.xml</param-value>
+        <param-value>classpath*:devinlove-core.xml, classpath*:devinlove-security.xml</param-value>
     </context-param>
 
     <!-- Reads request input using UTF-8 encoding -->
@@ -36,6 +36,20 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!-- security -->
+    <filter>
+        <filter-name>securityFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>springSecurityFilterChain</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>securityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 
     <!-- delegates incoming requests to Spring MVC front Servlet -->
     <servlet>
@@ -43,8 +57,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:devinlove-servlet.xml
-            </param-value>
+            <param-value>classpath:devinlove-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -58,14 +71,14 @@
         <session-timeout>10</session-timeout>
     </session-config>
 
-    <error-page>
-        <exception-type>java.lang.Exception</exception-type>
-        <location>/uncaughtException</location>
-    </error-page>
+    <!--<error-page>-->
+        <!--<exception-type>java.lang.Exception</exception-type>-->
+        <!--<location>/oops.html</location>-->
+    <!--</error-page>-->
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/jsp/notFound.jsp</location>
-    </error-page>
+    <!--<error-page>-->
+        <!--<error-code>404</error-code>-->
+        <!--<location>/notFound.html</location>-->
+    <!--</error-page>-->
 
 </web-app>

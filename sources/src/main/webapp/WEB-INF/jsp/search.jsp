@@ -6,16 +6,13 @@
 <html>
 <head>
     <title>DevInLove &middot; Love is almost there :(</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />"/>
-    <script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-	<style>
+    <style>
 		#first { padding-bottom:20px;}
 		#last { padding-top:30px}
 	</style>
 </head>
 <body>
-	<c:import url="/WEB-INF/jsp/header.jsp" />
+	<c:import url="includes/header.jsp" />
 	<div class="container">
         <div class="hero-unit">
 		    <h2>Well, almost there. With more time, we could have shown:</h2>
@@ -33,6 +30,6 @@ RETURN p</code></pre>
 		    </ul>
 	    </div>
 	</div>
-	<c:import url="/WEB-INF/jsp/footer.jsp" />
+	<c:import url="includes/footer.jsp" />
 </body>
 </html>
