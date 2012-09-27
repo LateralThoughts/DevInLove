@@ -1,30 +1,24 @@
 package com.lateralthoughts.devinlove.service;
 
-import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
-import static com.lateralthoughts.devinlove.domain.ToolAffinity.HATE;
-import static com.lateralthoughts.devinlove.domain.ToolAffinity.LOVE;
+import com.lateralthoughts.devinlove.domain.*;
+import com.lateralthoughts.devinlove.repository.CategoryRepository;
+import com.lateralthoughts.devinlove.repository.MascotRepository;
+import com.lateralthoughts.devinlove.repository.PersonRepository;
+import com.lateralthoughts.devinlove.repository.ToolRepository;
+import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.lateralthoughts.devinlove.domain.Category;
-import com.lateralthoughts.devinlove.domain.Mascot;
-import com.lateralthoughts.devinlove.domain.Person;
-import com.lateralthoughts.devinlove.domain.ProfoundIdentity;
-import com.lateralthoughts.devinlove.domain.Status;
-import com.lateralthoughts.devinlove.domain.Tool;
-import com.lateralthoughts.devinlove.domain.ToolAffinity;
-import com.lateralthoughts.devinlove.repository.CategoryRepository;
-import com.lateralthoughts.devinlove.repository.MascotRepository;
-import com.lateralthoughts.devinlove.repository.PersonRepository;
-import com.lateralthoughts.devinlove.repository.ToolRepository;
+import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
+import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.SALESMAN;
+import static com.lateralthoughts.devinlove.domain.ToolAffinity.HATE;
+import static com.lateralthoughts.devinlove.domain.ToolAffinity.LOVE;
 
 @Service
 @Transactional
@@ -83,24 +77,33 @@ public class GraphPopulator {
 
 	private void createOurBelovedTools() {
 		toolRepository.save(tool("Perforce", "SCM", "2011.1", 1800, 1, 1, false));
-		toolRepository.save(tool("Git", "SCM", "1.7.9.4", 2005, 4, 7, true));
+		toolRepository.save(tool("Git", "SCM", "1.7.21.1", 2005, 4, 7, true));
 		toolRepository.save(tool("IntelliJ IDEA", "IDE", "1.7.3", 1996, 23, 1, false));
-		toolRepository.save(tool("Eclipse", "IDE", "1.7.3", 1996, 23, 1, false));
+		toolRepository.save(tool("Eclipse", "IDE", "4.2", 1996, 23, 1, false));
 		toolRepository.save(tool("Java Standard Edition", "LANGUAGE", "1.7.3", 1996, 23, 1, false));
-		toolRepository.save(tool("PHP", "LANGUAGE", "5.4.0", 1995, 8, 6, false));
-		toolRepository.save(tool("Python", "LANGUAGE", "3.2.2", 1994, 1, 1, false));
+		toolRepository.save(tool("PHP", "LANGUAGE", "5.4.7", 1995, 8, 6, false));
+		toolRepository.save(tool("Python", "LANGUAGE", "3.2.3", 1994, 1, 1, false));
 		toolRepository.save(tool("Maven", "TOOL", "3.0.4", 2001, 1, 8, false));
-		toolRepository.save(tool("Ubuntu", "OPERATING SYSTEM", "11.10", 2004, 20, 10, false));
-		toolRepository.save(tool("Neo4J", "DATABASE", "1.6", 2007, 25, 12, true));
+		toolRepository.save(tool("Ubuntu", "OPERATING SYSTEM", "12.10", 2004, 20, 10, false));
+		toolRepository.save(tool("Neo4J", "DATABASE", "1.8RC1", 2007, 25, 12, true));
 	}
 
 	private void loadABunchOfPeopleIntoTheMatrix() {
-		Person florent = person("Florent", "Biville", "blue", tux, DEVELOPER, 42, "Hello world", tastesOfFlorent());
+		Person florent = person("Florent", "Biville", "blue", tux, DEVELOPER, 42, tastesOfFlorent());
+        personRepository.save(florent);
 		statusService.saveNewStatus(new Status("Associé chez Lateral-Thoughts"), florent);
-		Person olivier = person("Olivier", "Girardot", "green", django, DEVELOPER, 45, "A World Appart (Info)", tasteOfOlivier());
+
+        Person olivier = person("Olivier", "Girardot", "green", django, DEVELOPER, 45, tasteOfOlivier());
 		personRepository.save(olivier);
 		statusService.saveNewStatus(new Status("Fondateur et associé chez Lateral-Thoughts"), olivier);
 
+        Person cedric = person("Cédric", "Fauvet", "yellow", null, SALESMAN, 44, tastesOfCedric());
+        personRepository.save(cedric);
+        statusService.saveNewStatus(new Status("Premier meetup parisien. Merci So@t!"), cedric);
+
+        Person stefan = person("Stefan", "Armbruster", "red", null, DEVELOPER, 43, tastesOfStefan());
+        personRepository.save(stefan);
+        statusService.saveNewStatus(new Status("Long live Neo4J!"), stefan);
     }
 
 	private HashMap<String, ToolAffinity> tasteOfOlivier() {
@@ -120,13 +123,25 @@ public class GraphPopulator {
 		return floAffinity;
 	}
 
+    private HashMap<String, ToolAffinity> tastesOfCedric() {
+        HashMap<String, ToolAffinity> cedricAffinity = new HashMap<String, ToolAffinity>();
+        cedricAffinity.put("Neo4J", LOVE);
+        return cedricAffinity;
+    }
+
+    private HashMap<String, ToolAffinity> tastesOfStefan() {
+        HashMap<String, ToolAffinity> stefanAffinity = new HashMap<String, ToolAffinity>();
+        stefanAffinity.put("Neo4J", LOVE);
+        return stefanAffinity;
+    }
+
 	private Category category(final String name) {
 		Category category = new Category();
 		category.setName(name);
 		return category;
 	}
 
-	private Person person(final String firstName, final String lastName, final String color, final Mascot mascot, final ProfoundIdentity profoundIdentity, final int shoeSize, final String firstStatus, final Map<String, ToolAffinity> toolAffinities) {
+	private Person person(final String firstName, final String lastName, final String color, final Mascot mascot, final ProfoundIdentity profoundIdentity, final int shoeSize, final Map<String, ToolAffinity> toolAffinities) {
 		Person person = new Person();
 		person.setFavoriteColor(color);
 		person.setFirstName(firstName);

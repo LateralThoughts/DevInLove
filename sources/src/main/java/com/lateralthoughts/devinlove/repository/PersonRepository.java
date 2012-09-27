@@ -32,6 +32,5 @@ public interface PersonRepository extends GraphRepository<Person> {
 	Iterable<ToolUsage> findTools(@Param("id") Long personId);
 
 
-    // start person=node:Person({0}) return person - {0} will be "id:"+name
     Iterable<Person> findByFirstNameLike(String firstName);
 }
