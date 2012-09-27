@@ -18,7 +18,7 @@
         <div class="control-group">
             <label class="control-label" for="query">Cypher Query</label>
             <div class="controls">
-                <textarea name="cypherQuery" id="query" type="text"></textarea>
+                <textarea name="cypherQuery" class="span10" id="query" type="text"></textarea>
             </div>
         </div>
         <input type="submit" class="btn" />

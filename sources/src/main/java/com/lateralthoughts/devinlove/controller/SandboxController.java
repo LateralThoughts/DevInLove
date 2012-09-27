@@ -43,13 +43,20 @@ public class SandboxController {
 
     @RequestMapping(value = "/sandbox.html", method = POST)
     public String executeQuery(@RequestParam(value = "cypherQuery") String query, RedirectAttributes redirectAttributes) {
-        List<Object> results = newArrayList();
-        addAll(
-                results,
-                executeCypherQuery(query)
-        );
+        List<Object> results = getResultsOrErrorCause(query);
         redirectAttributes.addFlashAttribute("results", results);
         return "redirect:sandbox.html";
+    }
+
+    private List<Object> getResultsOrErrorCause(String query) {
+        List<Object> results = newArrayList();
+        try {
+            addAll(results, executeCypherQuery(query));
+        }
+        catch (Exception e) {
+            results.add(e.getMessage());
+        }
+        return results;
     }
 
     private Result<Object> executeCypherQuery(String query) {
