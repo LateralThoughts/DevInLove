@@ -4,6 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableSet;
 import static org.neo4j.graphdb.Direction.INCOMING;
+import static org.springframework.data.neo4j.support.index.IndexType.FULLTEXT;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -28,7 +29,7 @@ public class Tool {
 	@GraphId
 	private Long id;
 	@Fetch
-	@Indexed
+	@Indexed(indexType= FULLTEXT, indexName = "tool")
 	private String name;
 	private String version;
 	private Date creationDate;
