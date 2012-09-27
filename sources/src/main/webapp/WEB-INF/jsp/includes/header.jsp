@@ -15,6 +15,7 @@
                 </li>
 				<!--<li><a href="<c:url value="/login.html" />">Login</a></li>-->
                 <li><a href="<c:url value="/profiles.html" />">People</a></li>
+                <li><a href="<c:url value="/sandbox.html" />"><i class="icon-warning-sign icon-white"></i> Sandbox</a></li>
 			</ul>
 			<form class="navbar-search pull-left" method="get" action="<c:url value="/search.html" />">
 				<input type="text" class="search-query" id="search" firstName="search" placeholder="Search...">

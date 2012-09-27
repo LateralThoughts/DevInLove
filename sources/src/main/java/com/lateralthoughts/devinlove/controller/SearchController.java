@@ -22,6 +22,11 @@ public class SearchController {
     @RequestMapping(value = "/search.json", method = GET)
     @ResponseBody
     public List<Person> autocomplete(@RequestParam(value = "term") final String term) {
-        return newArrayList(finder.findByFirstNameLike(term));
+        try {
+            return newArrayList(finder.findByFirstNameLike(term));
+        }
+        catch(Exception e) {
+            return newArrayList();
+        }
     }
 }
