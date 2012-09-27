@@ -10,9 +10,11 @@ import org.springframework.data.neo4j.annotation.RelationshipEntity;
 import org.springframework.data.neo4j.annotation.RelationshipType;
 import org.springframework.data.neo4j.annotation.StartNode;
 
-@RelationshipEntity(type = "WORKS_WITH")
+@RelationshipEntity
 @TypeAlias("tool_usage")
 public class ToolUsage {
+	@RelationshipType
+	private Relationships type = WORKS_WITH;
 	@GraphId
 	private Long id;
 	@Fetch
@@ -21,8 +23,6 @@ public class ToolUsage {
 	@Fetch
 	@EndNode
 	private Tool tool;
-	@RelationshipType
-	private Relationships type = WORKS_WITH;
 	private String affinity;
 
 	public ToolUsage() {}
