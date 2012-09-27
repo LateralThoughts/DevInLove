@@ -6,12 +6,10 @@
 <html>
 <head>
     <title>DevInLove &middot; stars &amp; scars</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />"/>
-    <script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+    <c:import url="includes/head.jsp" />
 </head>
 <body>
-	<c:import url="/WEB-INF/jsp/header.jsp" />
+	<c:import url="includes/header.jsp" />
 	<div class="container">
 		<c:choose>
 			<c:when test="${empty profiles}">
@@ -31,6 +29,6 @@
 		    </c:otherwise>
 		</c:choose>
 	</div>
-	<c:import url="/WEB-INF/jsp/footer.jsp" />
+	<c:import url="includes/footer.jsp" />
 </body>
 </html>
