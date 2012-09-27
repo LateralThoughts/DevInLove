@@ -6,9 +6,9 @@
 <html>
 <head>
 <title>DevInLove &middot; /dev/null</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/third/bootstrap.min.css" />" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />" />
-<script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/third/bootstrap.min.js" />"></script>
 </head>
 <body>
 	<c:import url="includes/header.jsp" />

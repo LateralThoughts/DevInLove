@@ -20,7 +20,7 @@
 		           <c:forEach items="${profiles}" var="profile">
 		             <li class="span3">
 		             	<a href="<c:url value="/profile-${profile.id}.html" />">
-		             		<img src="<c:url value="resources/img/default_avatar_large.png" />" alt="" />
+		             		<img src="<c:url value="resources/images/default_avatar_large.png" />" alt="" />
 		             	</a>
 		             	<span class="profileOwner"><c:out value="${profile.firstName}" /> <c:out value="${profile.lastName}" /></span>
 		             </li>

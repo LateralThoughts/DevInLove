@@ -13,7 +13,7 @@
 	<c:import url="includes/header.jsp" />
 	<div class="container">
 		<div class="page-heading well" id="profile-heading">
-			<div class="span2"><img class="pull-left" src="<c:url value="/resources/img/default_avatar.jpg" />" alt=""/></div>
+			<div class="span2"><img class="pull-left" src="<c:url value="/resources/images/default_avatar.jpg" />" alt=""/></div>
 			<div id="profile-headings" class="pull-right span9">
 				<h1><c:out value="${guy.firstName}" /> <c:out value="${guy.lastName}" />!</h1>
 				<h2><small><c:out value="${guy.profoundIdentity}" /></small></h2>

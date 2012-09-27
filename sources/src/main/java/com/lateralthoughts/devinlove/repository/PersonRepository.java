@@ -13,6 +13,8 @@ import com.lateralthoughts.devinlove.domain.Person;
 import com.lateralthoughts.devinlove.domain.StatusRedaction;
 import com.lateralthoughts.devinlove.domain.ToolUsage;
 
+import java.util.List;
+
 public interface PersonRepository extends GraphRepository<Person> {
 
 	/*
@@ -28,4 +30,8 @@ public interface PersonRepository extends GraphRepository<Person> {
 	 */
 	@Query(type = Gremlin, value = "g.v(id).outE('WORKS_WITH').inV")
 	Iterable<ToolUsage> findTools(@Param("id") Long personId);
+
+
+    // start person=node:Person({0}) return person - {0} will be "id:"+name
+    Iterable<Person> findByFirstNameLike(String firstName);
 }

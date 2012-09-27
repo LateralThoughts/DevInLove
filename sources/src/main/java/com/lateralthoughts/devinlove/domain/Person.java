@@ -4,17 +4,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Collections.unmodifiableSet;
 import static org.neo4j.graphdb.Direction.BOTH;
 import static org.neo4j.graphdb.Direction.OUTGOING;
+import static org.springframework.data.neo4j.support.index.IndexType.FULLTEXT;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
-import org.springframework.data.neo4j.annotation.RelatedToVia;
+import org.springframework.data.neo4j.annotation.*;
 
 
 /**
@@ -25,6 +22,7 @@ import org.springframework.data.neo4j.annotation.RelatedToVia;
 public class Person {
 	@GraphId
 	private Long id;
+    @Indexed(indexType= FULLTEXT, indexName = "people")
 	private String firstName;
 	private String lastName;
 	private String favoriteColor;
@@ -45,6 +43,11 @@ public class Person {
 	private Set<StatusRedaction> statuses = new LinkedHashSet<StatusRedaction>();
 
 	private String profoundIdentity;
+
+
+    public void setId(long island) {
+        this.id = island;
+    }
 
 	public Long getId() {
 		return id;
