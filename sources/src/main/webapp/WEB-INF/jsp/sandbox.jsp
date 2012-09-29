@@ -18,15 +18,15 @@
         <div class="control-group">
             <label class="control-label" for="query">Cypher Query</label>
             <div class="controls">
-                <textarea name="cypherQuery" class="span10" id="query" type="text"></textarea>
+                <textarea name="cypherQuery" class="span10" id="query" type="text"><c:out value="${query}" /></textarea>
             </div>
         </div>
         <input type="submit" class="btn" />
     </form>
 
-    <ul id="results">
+    <div id="results" <c:if test="${isError == 'true'}">class="alert alert-error"</c:if>>
         <c:out value="${results}" />
-    </ul>
+    </div>
 </div>
 <c:import url="includes/footer.jsp" />
 </body>
