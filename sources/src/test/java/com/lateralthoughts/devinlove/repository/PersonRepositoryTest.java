@@ -1,8 +1,7 @@
 package com.lateralthoughts.devinlove.repository;
 
-import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
-import static org.fest.assertions.Assertions.assertThat;
-
+import com.lateralthoughts.devinlove.domain.Mascot;
+import com.lateralthoughts.devinlove.domain.Person;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lateralthoughts.devinlove.domain.Mascot;
-import com.lateralthoughts.devinlove.domain.Person;
+import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.DEVELOPER;
+import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:devinlove-core.xml")

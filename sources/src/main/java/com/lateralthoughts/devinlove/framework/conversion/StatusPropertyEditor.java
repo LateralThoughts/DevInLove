@@ -1,8 +1,8 @@
 package com.lateralthoughts.devinlove.framework.conversion;
 
-import java.beans.PropertyEditorSupport;
-
 import com.lateralthoughts.devinlove.domain.Status;
+
+import java.beans.PropertyEditorSupport;
 
 public class StatusPropertyEditor extends PropertyEditorSupport {
 

@@ -1,17 +1,17 @@
 package com.lateralthoughts.devinlove.domain;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static java.util.Collections.unmodifiableSet;
-import static org.neo4j.graphdb.Direction.BOTH;
-import static org.neo4j.graphdb.Direction.OUTGOING;
-import static org.springframework.data.neo4j.support.index.IndexType.FULLTEXT;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.neo4j.annotation.*;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.neo4j.annotation.*;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.Collections.unmodifiableSet;
+import static org.neo4j.graphdb.Direction.BOTH;
+import static org.neo4j.graphdb.Direction.OUTGOING;
+import static org.springframework.data.neo4j.support.index.IndexType.FULLTEXT;
 
 
 /**

@@ -1,23 +1,5 @@
 package com.lateralthoughts.devinlove.controller;
 
-import static org.neo4j.helpers.collection.IteratorUtil.asCollection;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.lateralthoughts.devinlove.domain.Person;
 import com.lateralthoughts.devinlove.domain.Status;
 import com.lateralthoughts.devinlove.domain.StatusRedaction;
@@ -25,6 +7,19 @@ import com.lateralthoughts.devinlove.framework.conversion.StatusPropertyEditor;
 import com.lateralthoughts.devinlove.framework.mvc.response.NotFoundException;
 import com.lateralthoughts.devinlove.repository.PersonRepository;
 import com.lateralthoughts.devinlove.service.StatusService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+
+import static org.neo4j.helpers.collection.IteratorUtil.asCollection;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class PersonController {

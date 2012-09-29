@@ -1,19 +1,16 @@
 package com.lateralthoughts.devinlove.repository;
 
-import static org.springframework.data.neo4j.annotation.QueryType.Cypher;
-import static org.springframework.data.neo4j.annotation.QueryType.Gremlin;
-
+import com.lateralthoughts.devinlove.domain.Person;
+import com.lateralthoughts.devinlove.domain.StatusRedaction;
+import com.lateralthoughts.devinlove.domain.ToolUsage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.lateralthoughts.devinlove.domain.Person;
-import com.lateralthoughts.devinlove.domain.StatusRedaction;
-import com.lateralthoughts.devinlove.domain.ToolUsage;
-
-import java.util.List;
+import static org.springframework.data.neo4j.annotation.QueryType.Cypher;
+import static org.springframework.data.neo4j.annotation.QueryType.Gremlin;
 
 public interface PersonRepository extends GraphRepository<Person> {
 

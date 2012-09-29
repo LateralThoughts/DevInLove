@@ -1,18 +1,9 @@
 package com.lateralthoughts.devinlove;
 
-import static org.neo4j.graphdb.Direction.BOTH;
-
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.RelationshipType;
-import org.neo4j.graphdb.ReturnableEvaluator;
-import org.neo4j.graphdb.StopEvaluator;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.graphdb.TraversalPosition;
-import org.neo4j.graphdb.Traverser;
-import org.neo4j.graphdb.Traverser.Order;
-import org.neo4j.graphdb.index.Index;
-import org.neo4j.graphdb.index.IndexManager;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 public class Example {

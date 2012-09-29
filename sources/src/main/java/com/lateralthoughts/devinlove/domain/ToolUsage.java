@@ -1,14 +1,9 @@
 package com.lateralthoughts.devinlove.domain;
 
-import static com.lateralthoughts.devinlove.domain.Relationships.WORKS_WITH;
-
 import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.neo4j.annotation.EndNode;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.RelationshipEntity;
-import org.springframework.data.neo4j.annotation.RelationshipType;
-import org.springframework.data.neo4j.annotation.StartNode;
+import org.springframework.data.neo4j.annotation.*;
+
+import static com.lateralthoughts.devinlove.domain.Relationships.WORKS_WITH;
 
 @RelationshipEntity
 @TypeAlias("tool_usage")

@@ -1,19 +1,13 @@
 package com.lateralthoughts.devinlove.domain;
 
-import static com.lateralthoughts.devinlove.domain.Relationships.WRITES;
+import com.ocpsoft.pretty.time.PrettyTime;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.neo4j.annotation.*;
 
 import java.util.Date;
 import java.util.Locale;
 
-import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.neo4j.annotation.EndNode;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.RelationshipEntity;
-import org.springframework.data.neo4j.annotation.RelationshipType;
-import org.springframework.data.neo4j.annotation.StartNode;
-
-import com.ocpsoft.pretty.time.PrettyTime;
+import static com.lateralthoughts.devinlove.domain.Relationships.WRITES;
 
 @RelationshipEntity(type = "WRITES")
 @TypeAlias("status_redaction")
