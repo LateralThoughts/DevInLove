@@ -20,6 +20,6 @@ public class ToolService {
 	public void saveNewTool(final Tool tool, final ToolAffinity affinity, final Person user) {
 		toolRepository.save(tool);
 		user.addTool(tool, affinity);
-		personRepository.save(user);
+		personRepository.persist(user);
 	}
 }

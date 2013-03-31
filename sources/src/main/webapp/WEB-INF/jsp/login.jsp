@@ -11,18 +11,18 @@
 <body>
 <c:import url="includes/header.jsp" />
 <div class="container">
-    <form action="<c:url value='/authenticate.html' />" method="post" class="span6 offset3 form-horizontal">
+    <form action="<c:url value="j_spring_security_check" />" method="POST" class="span6 offset3 form-horizontal">
         <legend>Lov'in</legend>
         <div class="control-group">
-            <label class="control-label" for="inputEmail">Email</label>
+            <label class="control-label" for="username">Login</label>
             <div class="controls">
-                <input type="text" id="inputEmail" placeholder="Email">
+                <input type="text" id="username" name="j_username" placeholder="Login">
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="inputPassword">Password</label>
+            <label class="control-label" for="password">Password</label>
             <div class="controls">
-                <input type="password" id="inputPassword" placeholder="Password">
+                <input type="password" id="password" name="j_password" placeholder="Password">
             </div>
         </div>
         <input type="submit" class="btn" value="Gogogo" />

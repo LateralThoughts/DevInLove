@@ -13,13 +13,13 @@
 	<div class="container">
 		<c:choose>
 			<c:when test="${empty profiles}">
-				<h1>Nobody! <small><a href="<c:url value="/import.html" />">Import...</a></small></h1>
+				<h1>Nobody! <small><a href="<c:url value="/import" />">Import...</a></small></h1>
 			</c:when>
 			<c:otherwise>
 			    <ul class="row profiles">
 		           <c:forEach items="${profiles}" var="profile">
 		             <li class="span3">
-		             	<a href="<c:url value="/profile-${profile.id}.html" />">
+		             	<a href="<c:url value="/profile-${profile.id}" />">
 		             		<img src="<c:url value="resources/images/default_avatar_large.png" />" alt="" />
 		             	</a>
 		             	<span class="profileOwner"><c:out value="${profile.firstName}" /> <c:out value="${profile.lastName}" /></span>

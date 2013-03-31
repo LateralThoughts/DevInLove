@@ -12,22 +12,15 @@ import org.springframework.data.repository.query.Param;
 import static org.springframework.data.neo4j.annotation.QueryType.Cypher;
 import static org.springframework.data.neo4j.annotation.QueryType.Gremlin;
 
-public interface PersonRepository extends GraphRepository<Person> {
+public interface PersonRepository extends GraphRepository<Person>, PersonRepositoryCustom {
 
-	/*
-	 * QUERY MEANING: get all relationships "WRITES" a.k.a. StatusRedaction
-	 * related to the identified Person, sorted by descending creation date
-	 */
-	@Query(type = Cypher, value = "START person=node({0}) MATCH (person)-[relationship:WRITES]->() RETURN relationship ORDER BY relationship.creationDate DESC")
+	@Query(value = "START person=node({0}) MATCH (person)-[relationship:WRITES]->() RETURN relationship ORDER BY relationship.creationDate DESC")
 	Page<StatusRedaction> findSortedStatuses(Long personId, Pageable pageRequest);
 
-	/*
-	 * QUERY MEANING: get all outgoing edges of type WORKS_WITH (a.k.a.
-	 * ToolUsage) of the specified vertex
-	 */
 	@Query(type = Gremlin, value = "g.v(id).outE('WORKS_WITH').inV")
 	Iterable<ToolUsage> findTools(@Param("id") Long personId);
 
-
     Iterable<Person> findByFirstNameLike(String firstName);
+
+    Person findByLogin(String login);
 }

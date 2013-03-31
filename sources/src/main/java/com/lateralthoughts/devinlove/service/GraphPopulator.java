@@ -7,9 +7,10 @@ import com.lateralthoughts.devinlove.repository.PersonRepository;
 import com.lateralthoughts.devinlove.repository.ToolRepository;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,23 +21,22 @@ import static com.lateralthoughts.devinlove.domain.ProfoundIdentity.SALESMAN;
 import static com.lateralthoughts.devinlove.domain.ToolAffinity.HATE;
 import static com.lateralthoughts.devinlove.domain.ToolAffinity.LOVE;
 
-@Service
+@Component
 @Transactional
 public class GraphPopulator {
 
-	@Autowired
+    @Autowired
 	private MascotRepository mascotRepository;
-	@Autowired
-	private PersonRepository personRepository;
-	@Autowired
-	private ToolRepository toolRepository;
-	@Autowired
-	private CategoryRepository categoryRepository;
-	@Autowired
-	private StatusService statusService;
-	private Mascot tux;
-	private Mascot django;
+    @Autowired
+    private PersonRepository personRepository;
+    @Autowired
+    private ToolRepository toolRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private StatusService statusService;
 
+    @PostConstruct
 	public void loadData() {
 		lockABunchOfMascotsInCagesBwahaha();
 		createToolCategories();
@@ -49,11 +49,9 @@ public class GraphPopulator {
 	 * voir http://en.wikipedia.org/wiki/List_of_mascots
 	 */
 	private void lockABunchOfMascotsInCagesBwahaha() {
-		django = mascot("Django Pony");
-		mascotRepository.save(django);
+		mascotRepository.save(mascot("Django Pony"));
 		mascotRepository.save(mascot("elePHPant"));
-		tux = mascot("Tux");
-		mascotRepository.save(tux);
+		mascotRepository.save(mascot("Tux"));
 		mascotRepository.save(mascot("Mozilla"));
 		mascotRepository.save(mascot("Geeko"));
 		mascotRepository.save(mascot("Duke"));
@@ -85,37 +83,37 @@ public class GraphPopulator {
 		toolRepository.save(tool("Python", "LANGUAGE", "3.2.3", 1994, 1, 1, false));
 		toolRepository.save(tool("Maven", "TOOL", "3.0.4", 2001, 1, 8, false));
 		toolRepository.save(tool("Ubuntu", "OPERATING SYSTEM", "12.10", 2004, 20, 10, false));
-		toolRepository.save(tool("Neo4J", "DATABASE", "1.8RC1", 2007, 25, 12, true));
+		toolRepository.save(tool("Neo4J", "DATABASE", "1.8.2", 2007, 25, 12, true));
 	}
 
 	private void loadABunchOfPeopleIntoTheMatrix() {
-		Person florent = person("Florent", "Biville", "blue", tux, DEVELOPER, 42, tastesOfFlorent());
-        personRepository.save(florent);
+		Person florent = person("Florent", "Biville", "blue", mascotRepository.findByName("Tux"), DEVELOPER, 42, tastesOfFlorent(), "s3cret", "fbiville");
+        personRepository.persist(florent);
 		statusService.saveNewStatus(new Status("Associé chez Lateral-Thoughts"), florent);
 
-        Person olivier = person("Olivier", "Girardot", "green", django, DEVELOPER, 45, tasteOfOlivier());
-		personRepository.save(olivier);
+        Person olivier = person("Olivier", "Girardot", "green", mascotRepository.findByName("Django Pony"), DEVELOPER, 45, tasteOfOlivier(), "s3cret", "ogirardot");
+		personRepository.persist(olivier);
 		statusService.saveNewStatus(new Status("Fondateur et associé chez Lateral-Thoughts"), olivier);
 
-        Person cedric = person("Cédric", "Fauvet", "yellow", null, SALESMAN, 44, tastesOfCedric());
-        personRepository.save(cedric);
+        Person cedric = person("Cédric", "Fauvet", "yellow", null, SALESMAN, 44, tastesOfCedric(), "s3cret", "cfauvet");
+        personRepository.persist(cedric);
         statusService.saveNewStatus(new Status("Premier meetup parisien. Merci So@t!"), cedric);
 
-        Person stefan = person("Stefan", "Armbruster", "red", null, DEVELOPER, 43, tastesOfStefan());
-        personRepository.save(stefan);
+        Person stefan = person("Stefan", "Armbruster", "red", mascotRepository.findByName("Duke"), DEVELOPER, 43, tastesOfStefan(), "s3cret", "sarmbruster");
+        personRepository.persist(stefan);
         statusService.saveNewStatus(new Status("Long live Neo4J!"), stefan);
     }
 
-	private HashMap<String, ToolAffinity> tasteOfOlivier() {
-		HashMap<String, ToolAffinity> olivierAffinity = new HashMap<String, ToolAffinity>();
+	private Map<String, ToolAffinity> tasteOfOlivier() {
+		Map<String, ToolAffinity> olivierAffinity = new HashMap<String, ToolAffinity>();
 		olivierAffinity.put("Python", LOVE);
 		olivierAffinity.put("Git", LOVE);
 		olivierAffinity.put("IntelliJ IDEA", LOVE);
 		return olivierAffinity;
 	}
 
-	private HashMap<String, ToolAffinity> tastesOfFlorent() {
-		HashMap<String, ToolAffinity> floAffinity = new HashMap<String, ToolAffinity>();
+	private Map<String, ToolAffinity> tastesOfFlorent() {
+		Map<String, ToolAffinity> floAffinity = new HashMap<String, ToolAffinity>();
 		floAffinity.put("Java Standard Edition", LOVE);
 		floAffinity.put("Perforce", HATE);
 		floAffinity.put("Git", LOVE);
@@ -123,14 +121,14 @@ public class GraphPopulator {
 		return floAffinity;
 	}
 
-    private HashMap<String, ToolAffinity> tastesOfCedric() {
-        HashMap<String, ToolAffinity> cedricAffinity = new HashMap<String, ToolAffinity>();
+    private Map<String, ToolAffinity> tastesOfCedric() {
+        Map<String, ToolAffinity> cedricAffinity = new HashMap<String, ToolAffinity>();
         cedricAffinity.put("Neo4J", LOVE);
         return cedricAffinity;
     }
 
-    private HashMap<String, ToolAffinity> tastesOfStefan() {
-        HashMap<String, ToolAffinity> stefanAffinity = new HashMap<String, ToolAffinity>();
+    private Map<String, ToolAffinity> tastesOfStefan() {
+        Map<String, ToolAffinity> stefanAffinity = new HashMap<String, ToolAffinity>();
         stefanAffinity.put("Neo4J", LOVE);
         return stefanAffinity;
     }
@@ -141,7 +139,7 @@ public class GraphPopulator {
 		return category;
 	}
 
-	private Person person(final String firstName, final String lastName, final String color, final Mascot mascot, final ProfoundIdentity profoundIdentity, final int shoeSize, final Map<String, ToolAffinity> toolAffinities) {
+	private Person person(final String firstName, final String lastName, final String color, final Mascot mascot, final ProfoundIdentity profoundIdentity, final int shoeSize, final Map<String, ToolAffinity> toolAffinities, String password, String login) {
 		Person person = new Person();
 		person.setFavoriteColor(color);
 		person.setFirstName(firstName);
@@ -149,6 +147,8 @@ public class GraphPopulator {
 		person.setMascot(mascot);
 		person.setProfoundIdentity(profoundIdentity);
 		person.setShoeSize(shoeSize);
+        person.setLogin(login);
+        person.setPassword(password);
 		for (Entry<String, ToolAffinity> toolAffinity : toolAffinities.entrySet()) {
 			person.addTool(findTool(toolAffinity.getKey()), toolAffinity.getValue());
 		}

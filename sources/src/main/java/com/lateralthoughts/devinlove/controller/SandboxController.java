@@ -25,7 +25,7 @@ public class SandboxController {
     private Neo4jTemplate template;
     private boolean isError = false;
 
-    @RequestMapping(value = "/sandbox.html", method = GET)
+    @RequestMapping(value = "/sandbox", method = GET)
     public ModelAndView executeQuery(RedirectAttributes redirectAttributes) {
         ModelAndView modelAndView = new ModelAndView("sandbox");
 
@@ -38,13 +38,13 @@ public class SandboxController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/sandbox.html", method = POST)
+    @RequestMapping(value = "/sandbox", method = POST)
     public String executeQuery(@RequestParam(value = "cypherQuery") String query, RedirectAttributes redirectAttributes) {
         List<Object> results = getResultsOrErrorCause(query);
         redirectAttributes.addFlashAttribute("isError", isError);
         redirectAttributes.addFlashAttribute("query", query);
         redirectAttributes.addFlashAttribute("results", results);
-        return "redirect:sandbox.html";
+        return "redirect:sandbox";
     }
 
     //the most typesafe method ever ;P

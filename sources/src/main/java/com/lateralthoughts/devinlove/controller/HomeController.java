@@ -9,8 +9,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 public class HomeController {
 
-	@RequestMapping(value = {"/","/index.html"}, method = GET)
-    public String index(final Model model) throws Exception {
+	@RequestMapping(value = {"","/"}, method = GET)
+    public String home() {
         return "index";
     }
 }

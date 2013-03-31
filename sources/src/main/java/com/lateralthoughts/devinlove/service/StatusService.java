@@ -21,6 +21,6 @@ public class StatusService {
 	public void saveNewStatus(final Status status, final Person author) {
 		statusRepository.save(status);
 		author.addStatus(status, new Date());
-		personRepository.save(author);
+		personRepository.persist(author);
 	}
 }

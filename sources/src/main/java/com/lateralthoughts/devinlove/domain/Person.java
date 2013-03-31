@@ -1,13 +1,20 @@
 package com.lateralthoughts.devinlove.domain;
 
+import com.google.common.base.Objects;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.neo4j.annotation.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.collect.Lists.newArrayList;
+import static com.lateralthoughts.devinlove.domain.Authorities.USER;
 import static java.util.Collections.unmodifiableSet;
 import static org.neo4j.graphdb.Direction.BOTH;
 import static org.neo4j.graphdb.Direction.OUTGOING;
@@ -19,46 +26,63 @@ import static org.springframework.data.neo4j.support.index.IndexType.FULLTEXT;
  */
 @NodeEntity
 @TypeAlias("person")
-public class Person {
+public class Person implements UserDetails {
 	@GraphId
 	private Long id;
-    @Indexed(indexType= FULLTEXT, indexName = "people")
+    @Indexed(indexType = FULLTEXT, indexName = "people")
 	private String firstName;
-	private String lastName;
-	private String favoriteColor;
-	@Fetch
+    private String lastName;
+    private String login;
+    private char[] password;
+    private String favoriteColor;
+    private int shoeSize;
+    private String profoundIdentity;
+    @Fetch
 	private Mascot mascot;
-	@RelatedTo(elementClass = Person.class, type = "IS_FRIEND_WITH", direction = BOTH)
-	private Set<Person> friends = new LinkedHashSet<Person>();
-
-	@RelatedToVia(elementClass = ToolUsage.class, type = "WORKS_WITH", direction = OUTGOING)
-	private Set<ToolUsage> tools = new LinkedHashSet<ToolUsage>();
-	/**
-	 * Simplistic European-formatted shoe size
-	 */
-	private int shoeSize;
-
-	@RelatedToVia(elementClass = StatusRedaction.class, type = "WRITES", direction = OUTGOING)
     @Fetch
 	private Set<StatusRedaction> statuses = new LinkedHashSet<StatusRedaction>();
+    @RelatedTo(elementClass = Person.class, type = "IS_FRIEND_WITH", direction = BOTH)
+	private Set<Person> friends = new LinkedHashSet<Person>();
+    @RelatedToVia(elementClass = ToolUsage.class, type = "WORKS_WITH", direction = OUTGOING)
+	private Set<ToolUsage> tools = new LinkedHashSet<ToolUsage>();
 
-	private String profoundIdentity;
+	public Long getId() {
+		return id;
+	}
+
+    @RelatedToVia(elementClass = StatusRedaction.class, type = "WRITES", direction = OUTGOING)
 
 
     public void setId(long island) {
         this.id = island;
     }
 
-	public Long getId() {
-		return id;
-	}
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
 	public String getFirstName() {
 		return firstName;
 	}
 
+	public void setFirstName(final String firstName) {
+		this.firstName = firstName;
+	}
+
 	public String getLastName() {
 		return lastName;
+	}
+
+	public void setLastName(final String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getFavoriteColor() {
+		return favoriteColor;
 	}
 
 	public void setFavoriteColor(final String favoriteColor) {
@@ -66,16 +90,12 @@ public class Person {
 		this.favoriteColor = favoriteColor.toUpperCase();
 	}
 
-	public String getFavoriteColor() {
-		return favoriteColor;
+	public Mascot getMascot() {
+		return mascot;
 	}
 
 	public void setMascot(final Mascot mascot) {
 		this.mascot = mascot;
-	}
-
-	public Mascot getMascot() {
-		return mascot;
 	}
 
 	public Set<Person> getFriends() {
@@ -96,12 +116,12 @@ public class Person {
 		return tools;
 	}
 
-	public void setShoeSize(final int shoeSize) {
-		this.shoeSize = shoeSize;
-	}
-
 	public int getShoeSize() {
 		return shoeSize;
+	}
+
+	public void setShoeSize(final int shoeSize) {
+		this.shoeSize = shoeSize;
 	}
 
 	public Iterable<StatusRedaction> getStatuses() {
@@ -113,52 +133,76 @@ public class Person {
 		statuses.add(statusRedaction);
     }
 
-	public void setProfoundIdentity(final ProfoundIdentity profoundIdentity) {
-		this.profoundIdentity = profoundIdentity.toString();
-	}
-
 	public String getProfoundIdentity() {
 		return profoundIdentity;
 	}
 
-	public void setFirstName(final String firstName) {
-		this.firstName = firstName;
+	public void setProfoundIdentity(final ProfoundIdentity profoundIdentity) {
+		this.profoundIdentity = profoundIdentity.toString();
 	}
 
-	public void setLastName(final String lastName) {
-		this.lastName = lastName;
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return newArrayList(USER);
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((getFirstName() == null) ? 0 : getFirstName().hashCode());
-		result = prime * result + ((getLastName() == null) ? 0 : getLastName().hashCode());
-		return result;
-	}
+    public void setPassword(String password) {
+        this.password = password.toCharArray();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Person other = (Person) obj;
-		if (getFirstName() == null) {
-			if (other.getFirstName() != null)
-				return false;
-		}
-		else if (!getFirstName().equals(other.getFirstName()))
-			return false;
-		if (getLastName() == null) {
-			if (other.getLastName() != null)
-				return false;
-		}
-		else if (!getLastName().equals(other.getLastName()))
-			return false;
-		return true;
-	}
+    @Override
+    public String getPassword() {
+        return new String(password);
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person other = (Person) o;
+        return equal(shoeSize, other.shoeSize) &&
+            equal(favoriteColor, other.favoriteColor) &&
+            equal(firstName, other.firstName) &&
+            equal(lastName, other.lastName) &&
+            equal(login, other.login) &&
+            equal(profoundIdentity, other.profoundIdentity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(
+            login,
+            firstName,
+            lastName,
+            favoriteColor,
+            shoeSize,
+            profoundIdentity
+        );
+    }
 }
